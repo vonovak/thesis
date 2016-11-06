@@ -112,68 +112,77 @@ V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 \usepackage{lipsum,blindtext}
 \usepackage{mathrsfs} % provides \mathscr used in the ridiculous examples
 
+\usepackage{amsmath} % Advanced math typesetting
+\usepackage[utf8]{inputenc} % Unicode support (Umlauts etc.)
+\usepackage{hyperref} % Add a link to your document
+\usepackage{graphicx} % Add pictures to your document
+\usepackage{listings} % Source code formatting and highlighting
+\usepackage{enumitem}
+
 \begin{document}
 
 \maketitle
 
-\chapter{Introduction}
+\input{chapters/intro}
 
-This thesis shows that \ldots
-
-\begin{figure}[!h]
-\rule{3cm}{3cm}
-\caption{Test}
-\end{figure}
-
-\part{My Party}
-
-\input{ctutest-1}
-
-\input{ctutest-2}
-
-
-\part{Your Party}
-
-\blindmathtrue
-
-\blinddocument
-
-\begin{table}
-\begin{ctucolortab}
-\begin{tabular}{cc}
-\bfseries Foo & \bfseries Bar \\\Midrule
-foo1 & bar1 \\
-foo2 & bar2
-\end{tabular}
-\end{ctucolortab}
-\caption{Foobar.}
-\label{tab:foobar}
-\end{table}
-
-\begin{figure}
-\includegraphics[width=0.4\textwidth]{ctu_logo_black}
-\caption{Black logo of the CTU in Pragueueue.}
-\end{figure}
-
-\begin{figure}[!t]
-\includegraphics[width=0.4\textwidth]{ctu_logo_blue}
-\caption{Blue logo of the CTU in Pragueueue.}
-\end{figure}
-
-\chapter{Conclusions}
-
-\section{Test --- this is just a little test of something in the table of contents}
-
-\subsection{Yes, table of contents}
-
-\begin{theorem}\begin{enumerate} \item Bla \item Blo \end{enumerate} \end{theorem}
-
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis interdum facilisis urna, at tincidunt leo consectetur non. Maecenas bibendum mi vitae libero pharetra, ac ullamcorper nulla pellentesque. Sed sit amet massa nunc. Aenean placerat a est sodales sagittis. Quisque purus nibh, auctor ut consectetur at, suscipit non erat. Donec condimentum porttitor risus, vitae fringilla lectus tincidunt nec. Nulla leo quam, commodo eu ornare non, iaculis sed nulla. Duis gravida lacus quis purus sodales, vitae malesuada justo ultricies. Vestibulum nisl nulla, commodo non pellentesque a, fringilla a risus. Ut quis magna nulla. Mauris vitae ultricies ante, in consectetur justo. 
-
-\medskip
-
-\begin{proof}\begin{enumerate} \item[8] Bla \item Blo \end{enumerate} \end{proof}
+%\chapter{Introduction}
+%
+%This thesis shows that \ldots
+%
+%\begin{figure}[!h]
+%\rule{3cm}{3cm}
+%\caption{Test}
+%\end{figure}
+%
+%\part{My Party}
+%
+%\input{ctutest-1}
+%
+%\input{ctutest-2}
+%
+%
+%\part{Your Party}
+%
+%\blindmathtrue
+%
+%\blinddocument
+%
+%\begin{table}
+%\begin{ctucolortab}
+%\begin{tabular}{cc}
+%\bfseries Foo & \bfseries Bar \\\Midrule
+%foo1 & bar1 \\
+%foo2 & bar2
+%\end{tabular}
+%\end{ctucolortab}
+%\caption{Foobar.}
+%\label{tab:foobar}
+%\end{table}
+%
+%\begin{figure}
+%\includegraphics[width=0.4\textwidth]{ctu_logo_black}
+%\caption{Black logo of the CTU in Pragueueue.}
+%\end{figure}
+%
+%\begin{figure}[!t]
+%\includegraphics[width=0.4\textwidth]{ctu_logo_blue}
+%\caption{Blue logo of the CTU in Pragueueue.}
+%\end{figure}
+%
+%\chapter{Conclusions}
+%
+%\section{Test --- this is just a little test of something in the table of contents}
+%
+%\subsection{Yes, table of contents}
+%
+%\begin{theorem}\begin{enumerate} \item Bla \item Blo \end{enumerate} \end{theorem}
+%
+%
+%Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis interdum facilisis urna, at tincidunt leo consectetur non. Maecenas bibendum mi vitae libero pharetra, ac ullamcorper nulla pellentesque. Sed sit amet massa nunc. Aenean placerat a est sodales sagittis. Quisque purus nibh, auctor ut consectetur at, suscipit non erat. Donec condimentum porttitor risus, vitae fringilla lectus tincidunt nec. Nulla leo quam, commodo eu ornare non, iaculis sed nulla. Duis gravida lacus quis purus sodales, vitae malesuada justo ultricies. Vestibulum nisl nulla, commodo non pellentesque a, fringilla a risus. Ut quis magna nulla. Mauris vitae ultricies ante, in consectetur justo. 
+%
+%\medskip
+%
+%\begin{proof}\begin{enumerate} \item[8] Bla \item Blo \end{enumerate} \end{proof}
 
 \appendix
 

@@ -1,0 +1,12 @@
+\chapter{Testing}
+
+The lowest level upon which the application is tested is unit testing. I have chosen Jest for implementing the unit tests. Jest, like several other tools I have used, is actively developed by Facebook and is open source. 
+
+It offers essential functionality similar to other popular Javascript test runners such as AVA or Mocha, such as making assertions upon the results of tested code, creating mocks and also offers snapshot testing, which is a React-specific feature for testing the structure of React components without directly rendering them. Snapshot testing is a very useful feature especially in React Native as it allows to test component appearance without the need for rendering the UI on a device or emulator. 
+The way the snapshots work is following: take a simple React Native component that accepts a name prop and renders todo. 
+
+Jest creates a snapshot that captures the necessary information for component rendering. When the component changes, the snapshot changes as well, and we're notified of this fact during testing and also by version control when the change is being merged. 
+
+Snapshot testing currently has the drawback of not being able to capture possible changes caused by the change in the inner state of the component (if there is any state), ie. snapshot testing only considers the component’s props. This, however, is a subject to change in one of the future releases of Jest, which is currently being developed at a quick pace.
+
+Since a React Native app is a native application, we can use the same testing frameworks that we would use for testing any other native app on ios or Android. 

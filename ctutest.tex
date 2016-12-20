@@ -21,7 +21,7 @@
 	department-czech = {Department of Computer Graphics and Interaction},
 	department-english = {Department of Computer Graphics and Interaction},
 	author = {Vojtěch Novák},
-	supervisor = {Ivo Malý},
+	supervisor = {ing. Ivo Malý, Ph.D.},
 %	supervisor-address = {Ústav X, \\ Uliční 5, \\ Praha 99},
 %	supervisor-specialist = {John Doe},
 	fieldofstudy-english = {Software Engineering},
@@ -116,17 +116,112 @@ V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 \usepackage[utf8]{inputenc} % Unicode support (Umlauts etc.)
 \usepackage{hyperref} % Add a link to your document
 \usepackage{graphicx} % Add pictures to your document
-\usepackage{listings} % Source code formatting and highlighting
+%\usepackage{listings} % Source code formatting and highlighting
 \usepackage{enumitem}
+\usepackage{float}
 
+%folder and file listing
+\usepackage{forest}
+
+\definecolor{folderbg}{RGB}{124,166,198}
+\definecolor{folderborder}{RGB}{110,144,169}
+
+\def\Size{4pt}
+\tikzset{
+	folder/.pic={
+		\filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
+		(-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);  
+		\filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
+		(-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
+	}
+}
+%
+
+% http://tex.stackexchange.com/questions/37581/latex-figures-side-by-side
+
+%% for code listings
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\usepackage[final]{listings}
+\usepackage{courier}
+\lstdefinelanguage{JavaScript}{
+	keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with, let},
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	morestring=[b]',
+	morestring=[b]",
+	ndkeywords={class, export, boolean, throw, implements, import, this},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	sensitive=true
+}
+\lstset{
+	language=JavaScript,
+	basicstyle=\footnotesize\ttfamily, % Standardschrift
+	numbers=left,               % Ort der Zeilennummern
+	numberstyle=\tiny,          % Stil der Zeilennummern
+	%stepnumber=2,               % Abstand zwischen den Zeilennummern
+	numbersep=5pt,              % Abstand der Nummern zum Text
+	tabsize=2,                  % Groesse von Tabs
+	extendedchars=true,         %
+	breaklines=true,            % Zeilen werden Umgebrochen
+	frame=b,         
+	%        keywordstyle=[1]\textbf,    % Stil der Keywords
+	%        keywordstyle=[2]\textbf,    %
+	%        keywordstyle=[3]\textbf,    %
+	%        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+	%stringstyle=\color{white}\ttfamily, % Farbe der String
+	showspaces=false,           % Leerzeichen anzeigen ?
+	showtabs=false,             % Tabs anzeigen ?
+	xleftmargin=17pt,
+	framexleftmargin=17pt,
+	framexrightmargin=5pt,
+	framexbottommargin=4pt,
+	%backgroundcolor=\color{lightgray},
+	showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+}
+
+\definecolor{mygray}{cmyk}{0.43, 0.35, 0.35,0.01} 
+
+
+
+\lstloadlanguages{% Check Dokumentation for further languages ...
+	Java
+}
+%    \DeclareCaptionFont{blue}{\color{blue}} 
+
+%\captionsetup[lstlisting]{singlelinecheck=false, labelfont={blue}, textfont={blue}}
+\usepackage{caption}
+%\DeclareCaptionFont{white}{\color{white}}
+%\DeclareCaptionFormat{listing}{{\parbox{\textwidth}{\hspace{10pt}#1#2#3}}}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{.3, .13, 0, 0 }{\parbox{\dimexpr\textwidth-2\fboxsep\relax}{#1\hspace{10pt}#2#3}}}
+
+\captionsetup[lstlisting]{format=listing, singlelinecheck=true, margin=0pt, font={bf,footnotesize}}
+%% end of for code listings
 \begin{document}
 
 \maketitle
 
 \input{chapters/intro}
 
+\input{chapters/analysis}
+
 \input{chapters/design}
 
+\input{chapters/implementation}
+
+\input{chapters/testing}
+
+\input{chapters/conclusions}
+
+%\input{chapters/implementation}
+
+%\input{chapters/conclusions}
 
 %\chapter{Introduction}
 %

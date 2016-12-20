@@ -5,7 +5,10 @@
   \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
 }
 \providecommand{\href}[2]{#2}
-\begin{thebibliography}{xam16}
+\begin{thebibliography}{Wes16}
+
+\bibitem[Byr15]{redux:intro}
+Lee Byron, \emph{React conf 2015 - immutable data and react}, 2015.
 
 \bibitem[rn:16a]{rn:hotreload}
 \emph{Introducing hot reloading}, 2016.
@@ -15,6 +18,9 @@
 
 \bibitem[rn:16c]{rn:nativemodules}
 \emph{Native modules}, 2016.
+
+\bibitem[Wes16]{mobx:intro}
+Michel Weststrate, \emph{Mobx - simple, scalable state management}, 2016.
 
 \bibitem[xam16]{xamarin:sharing_code}
 \emph{Sharing code options in xamarin}, 2016.

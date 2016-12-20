@@ -100,7 +100,7 @@ As I explained earlier, React app is composed of a tree of components where prop
 \lstinputlisting[label=code:provider,caption=Using MobX Provider and inject]{./code/provider.js}
 
 
-\section{Upload module}
+\section{Upload Module}
 Upload module is a native module made to allow users to upload files to Memsource Cloud and create jobs from them. There are important differences in its iOS and Android implementations, but both expose the same interfaces to the JavaScript layer. When talking about the file handling in the native module, I will use the singular form for simplicity, but note the upload module has capabilities for uploading multiple files.
 
 
@@ -128,7 +128,7 @@ Once the file is uploaded, the app is notified about this event by the delegates
 
 The problem with todo method is that it is not possible to upload a file using the \texttt{multipart/form-data} type; the file uploaded by iOS is sent directly in the body of the request and therefore having a custom request body is impossible unless we write the multipart data directly into the file (which cannot be considered a good practice). Possible workaround here is to use another Memsource API, the File API which allows to upload a file in the request body and returns a file ID which can be used in other API calls. The problem with this approach is that we would need to make two api calls to make the job import happen: first to upload the file and second to call the Create Job api. This poses a possible issue since iOS may decide to not perform our background request. 
 
-iOS uses several pieces of information to decide whether or not a request will be carried out. The decision involves eg. how of often the app is used by the phone's owner or what the battery level is. The exact algorithm is not publicly available. It may therefore happen that the first request for file upload will be honored but the second request for actually creating the job may be ignored. The best possible solution to this is implementing another API which would accept the file in the request body and the numerous parameters sent to the the create job api would be sent as a json string in a special request header. For the time being, I have implemented the described workaround and a better solution on the server side may be implemented later.
+iOS uses several pieces of information to decide whether or not a request will be carried out. The decision involves eg. how of often the app is used by the phone's owner or what the battery level is. The exact algorithm is not publicly available. It may therefore happen that the first request for file upload will be honored but the second request for actually creating the job may be ignored. The best possible solution to this is implementing another API which would accept the file in the request body and the numerous parameters sent to the the create job api would be sent as a json string in a special request header. For the time being, I have implemented the described workaround and a better solution on the server side may be implemented later. The iOS native module is written in Swift 3.
 
 
 \section{State Persistence}
@@ -141,7 +141,7 @@ While the implemented serialization works well, it poses extra level of complexi
 State is serialized upon switching the app into the background. Serializr outputs a json object which is persisted using React Native’s AsyncStorage as a string. Note that storage of user credentials is handled differently and is described in the next section. Upon app start, the objects that hold state are created empty, the json string is deserialized and and all of the information is inserted back into the state objects through setters. 
 
 
-\subsection{Saving user sensitive information.}
+\subsection{Storing User Credentials}
 
 Communication with the Memsource API requires the user to enter their username and password. The app then asks for a token which is used for the requests to follow. The token validity is limited to 24 hours and the app therefore needs to request a new one once the current token's validity is approaching its expiration date. To be able to ask for a new token, the app needs to have the user credentials at its disposal, and persist them so that it doesn't need to repeatedly ask the user to enter them. Such storage, obviously, needs to be safe and the AsyncStorage used for state persistence does not meet the safety criteria. To store the user credentials, I used a package which internally uses Keychain on iOS and an encrypted SharedPreferences entry on Android. I authored the Android part of the package which is now available as react-native-keychain on npm. 
 
@@ -175,52 +175,20 @@ When the app is offline, there is a bar displayed at the top of the screen, and 
 
 
 One of the advantages of using React Native or hybrid application frameworks is the ability to use services such as Code Push that enable the developer to update the application without going through Apple AppStore or Google Play Store submission process. This is achieved through being able to switch the JavaScript bundle which contains the app’s logic for another one. When a developer wants to publish a new version of the app they create a new JavaScript bundle and upload it to a Code Push server. 
-When a user starts the app, it downloads the new bundle (if available) and stores it. In a typical scenario, the bundle would be applied upon the next app start but this is configurable. This way the user receives new app version without any interruption on their side. This does not only give us the ability to publish updates at an arbitrary frequency but also offers greater control over the updates, since the user does not influence them.
+When a user starts the app, it downloads the new bundle (if available) and stores it. In a typical scenario, the bundle would be applied upon the next app start but this is configurable. This way the user receives updates without any interruption on their side. This does not only give us the ability to publish updates at an arbitrary frequency but also offers greater control over the updates, since the user does not influence them.
 
 
 In the app, I have used the Code Push service which is being developed by Microsoft and currently offered free of charge. 
 
 
-Another benefits this brings and that I have implemented is multi-stage deployment and testing. For the purposes of our app, three build configurations were set up: debug configuration where code-push is not being used; this configuration is used for everyday development and runs in React Native’s Dev mode. 
-The second configuration is Staging, which is configured to request the staging version of the JavaScript bundle from code-push and uses Memsource’s pre-release server at \texttt{cloud 9.memsource.com} to serve its requests. This version can be used to be tested with the Memsource Cloud version which is to be deployed and is also intended to be used for testing. When suitable, the updates made in the staging version can be promoted to the release build of the application by a single cli command. The development mode is not enabled in this configuration and thus the development warnings are not shown. 
+Other benefits this brings and that I have implemented is multi-stage deployment and testing. For the purposes of our app, three build configurations were set up: debug configuration where code-push is not being used; this configuration is used for everyday development and runs in React Native’s Dev mode.
+
+The second configuration is Staging, which is set up to request the staging version of the JavaScript bundle from Code Push and uses Memsource’s pre-release server at \texttt{cloud 9.memsource.com} to serve its requests. This version is made for testing the application's new features and also its compatibility with the Memsource Cloud version which is the next to be deployed to production. The development mode is not enabled in this configuration and thus the development warnings are not shown. 
 
 
-Finally, the third build configuration is the release configuration. This version uses the corresponding JavaScript bundle from code-push to get its updates and is identical with the staging version, with the exception of not having the changes that are being tested in the staging version. This is the version that runs on the phones of the Memsource’s customers.
+Finally, the third setup is for release. This configuration uses the corresponding JavaScript bundle from Code Push to get its updates and is identical with the staging version, with the exception of not having the latest updates that are being tested in staging. This is the version that runs on the phones of the Memsource’s customers. When suitable, the updates made in the staging version can be easily promoted to the release build of the application by a single cli command.
 
-
-
-\section{Issues}
-
-Issues here
-
-\subsection{Navigation}
-
-React Native started off with two solutions for navigation (i.e. For letting the user transition between different screens of the app) - the Navigator and navigatorIOS. Navigator is implemented entirely in JavaScript, runs on both platforms and tries to mimic the appearance of native iOS navigation, while NavigatorIOS leverages the native navigation of iOS.
-They originally started as two competing implementations solving the same problem (todo ref) with the goal of assessing which of the two solutions should be supported further on. Ultimately, the Navigator solution was found to be better for reasons described later on and facebook used it in the F8 and Facebook ads apps. 
-
-
-There is one notable drawback to Navigator - it is only trying to mimic the native navigation. This includes navigation bar with its animations and transitions, as well as transitions to and from different pages of the app and implementation of the swipe back gesture. This, to a certain extent, can make an app which uses Navigator feel less native.
-Having navigation controlled by JavaScript has its benefits - most importantly it allows for complete control of the navigation state, while with navigatorIOS, some information sent from JavaScript to the native side gets stored in the native code where it is managed by iOS internally which makes it hard to keep the information in JavaScript up to date. The difficulty of keeping JavaScript in sync with iOS was the main reason why Facebook decided to favor the Navigator. 
-
-
-todo perf
-On the web there is no concept of nested navigations. Like a modal that has its own navigation, or
-
-There are multiple navigation stacks possible in a mobile app (each for a tab).
-
-todo gestures
-
-Another potential benefit of using Navigator is the fact that it can be used on Android as well (this is thanks to the fact it is written in JavaScript). This, is not of a great importance because it would make an android app look like an iOS app but it allows for reusing the same code to transition from one page to another, with the platform - specific details handled by configuration. 
-
-
-Wix
-Some would say that not using the native navigation breaks the promise of React Native - that is to be able to create apps that are indistinguishable from native ones. This is the reason why Wix (an Israeli mobile and web development company) decided to implement a native navigation for react native, called react-native-navigation. At the time of writing, there is not a stable release of this package available.
-
-Navigator and navigatorIOS are two initial implementations which both attempted to bring the navigation from iOS to react native. Over the course of time new issues with using Navigator emerged and there was a need to come with new way of managing navigation state. At the time of writing, this new solution is called NavigationExperimental. It offers improved api and support for several navigation stacks at once. 
-
-
-
-\section{Code Quality}
+\section{Code Quality Tools}
 
 Due to JavaScript's dynamic nature and the absence of any transformation that would take place before the code starts its execution, it is relatively easy to introduce bugs that only come to light during runtime. There are, however, tools for code quality assurance that help developers find potential bugs before the code is executed. In this project, I have used two such tools which this section shortly describes.
 
@@ -237,10 +205,39 @@ Flow supports standard primitive types such as number or string, as well as cust
 
 One of very useful features of Flow are maybe types which are denoted by a question mark (eg. \texttt{?string}). When accessing a function or property on an object which is of maybe type, Flow will issue a warning that \texttt{Property cannot be accessed on possibly null or undefined value}. This greatly helps avoiding the "Undefined is not an object" error which is one of the most common ones in JavaScript development. Other handy features include interfaces or guarding that a function doesn't receive too few or too many parameters. I have used Flow extensively throughout the project.
 
-Before running the code on the device, the type annotations can be easily stripped away using a babel plugin.
-
 \subsection{ESLint}
 
 ESLint is a linter -- a tool that flags potential problems in source code. ESLint takes the form of a set of rules that the developer specifies and ESLint warns her when the code violates a particular rule. Rules may describe a potential bug in source code (such as calling a function that is not defined) or a desired coding style (such as using semicolons at the end of a line).
 
 ESLint itself does not force any rules onto the developer. Instead, different rule sets can be obtained online and plugged into the project. Choosing such rule set is often a matter of personal preference or the technology that the project uses. For example, there are React Native-specific rules that eg. warn about having unused style definitions in the component code.
+
+\section{Navigation}
+
+By navigation, in the context of React Native, I mean transitioning between different screens of the app. Navigation integrates with the components and also stores very closely, because many parts of the code will want to navigate to a different component as a response to user input or network event, so the navigation solution is of great importance. 
+
+RN started off with two solutions for navigation - the Navigator and NavigatorIOS. Navigator is implemented entirely in JavaScript, runs on both platforms and tries to mimic the appearance of native navigation, while NavigatorIOS leverages the native navigation of iOS.
+They originally started as two competing implementations solving the same problem (todo ref) with the goal of assessing which of the two solutions should be supported further on. Ultimately, the Navigator solution was found to be better for reasons described later on, and Facebook used it in the F8 and Facebook ads applications. 
+
+
+There is one notable drawback to Navigator - it is only trying to mimic the native navigation. This includes navigation bar with its animations, as well as transitions to and from different scenes of the app and implementation of the swipe back gesture. This, to a certain extent, can negative affect the user experience.
+Having navigation controlled by JavaScript has its benefits - most importantly it allows for complete control of the navigation state, while with NavigatorIOS, some information sent from JavaScript to the native layer gets stored in the native code where it is managed by iOS internally which makes it hard to keep the information in JavaScript up to date. The difficulty of keeping JavaScript in sync with iOS and the fact it only works on one platform were the main reasons why Facebook decided to favor the Navigator.
+
+Some would say that not using the native navigation breaks the promise of React Native - that is to be able to create apps that are indistinguishable from native ones. This is why Wix (an Israeli mobile and web development company) is working on a native navigation for react native. At the time of writing, there is not a stable release of this package available which is why I didn't use it.
+
+Over the course of time new issues with using Navigator emerged and there was a need to come up with a better way of managing the navigation state. For example, the original Navigator becomes hard to work with in case we use several instances of it. For example, the application I have developed uses three different navigation components - one StackNavigation as a root navigator. The root navigator contains another StackNavigation where the vast majority of the app's content is pushed. In some places, however, I wanted to display modal windows. The modals are pushed onto the master navigator so that they are displayed in the foreground. The modal window contains another StackNavigation of its own, which yields a total of three navigators, but for applications that use a tab-based navigation or drawer navigation, that number is very likely higher. 
+
+
+At the time when I started working on the project, the new solution to navigation was already present in the RN core and was named NavigationExperimental. However, since NavigationExperimental is only a set of low-level components, people started writing libraries around them to provide a more feature-rich experience for the developers. In the end, I have settled with a library called ex-navigation. It offers some needed functionality out of the box and allows to customize the behavior for iOS and Android such as handling the navigation bar, animations and back gesture on iOS as well as the back button handling on Android. Most importantly it works well with several navigators which can be managed independently and offers better animation performance - on Android, the animations are controlled from the native layer.
+
+\section{Issues}
+
+There were a number of issues encountered throughout the development, caused by different factors such as React Native's immaturity and frequent releases where new version is shipped every other week and updating is not always straightforward due to breaking changes (although this is changing to one release per month as of January 2017), lack of quality documentation, or my effort to create a partially different UIs on each platform so that the user experience is on par with what the user would get in an application designed specifically for iOS or Android. This sometimes led to dead ends such as when I had to replace the entire navigation solution for a new one. Navigation as a whole is an interesting topic, which is why I devoted an entire section to it.
+Another issue is minor differences in behavior on each platform -- the component appearance on iOS may not always be the same as the one on Android. This involves borders, border radius or animations. However, given React Native's complexity --- the library uses JavaScript, Java, Objective-C, C++ and also C --- it does a very good job in abstracting the platform away.
+Other very painful issue, although visible only when rendering large UIs, are animations which are controlled from the JavaScript thread. This means that the JavaScript thread has to periodically send commands to the native layer for the animation to run. If the JavaScript thread has too much work on it, issuing the command is delayed and the result is a laggy animation. This issue, however, is already partially solved and offloading the animations from the JavaScript thready will probably be fully functional in the first months of 2017. 
+%Also, the fact that React Native is not a framework gives developer the freedom to do things in different ways, which also means that the first way a developer reaches for does not always turn out to be the best one. 
+
+Throughout the development of the application, I have contributed to the following projects by bug fixes or code and documentation improvements: react-native-keychain, mobx-utils, react-native-scrollable-tab-view, ex-navigation, react-native-router-flux, serializr, react-native-android-checkbox, mobx, react-native. 
+
+
+
+

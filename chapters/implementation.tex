@@ -1,9 +1,20 @@
 \chapter{Implementation}
 
-From a higher-level perspective, there are several subparts of the project that need to cooperate for the app to work well. Firstly, there are the domain objects and stores implemented with the help of MobX. Secondly, there is the view layer created with React Native. The third piece is handling API communication and lastly, there are the native modules for handling job upload (ie. uploading files to Memsource and creating jobs from them) which are the only custom code of the application that is not be written in JavaScript. This chapter explains in depth the solutions to these tasks and issues encountered along the way.
+This chapter describes the implementation of the features that were identified in the analysis. I will focus on the interesting parts of the implementation.
+
+From a higher-level perspective, there are several subparts of the project that need to cooperate for the client app to work well. Firstly, there are the domain objects and stores implemented with the help of MobX. Secondly, there is the view layer created with React Native. The third piece is handling API communication and lastly, there are the native modules for handling job upload (ie. uploading files to Memsource and creating jobs from them) which are the only custom code of the application that is not be written in JavaScript. This chapter explains in depth the solutions to these tasks and issues encountered along the way.
 
 
-\begin{figure}[H]
+In the following text, I will often use the terms Javascript layer, native layer and asynchronous bridge. When talking about the Javascript layer, I refer to the Javascript code which runs in JavascriptCore engine. By native layer I mean the code that is being executed on the Android’s virtual machine or todo in iPhone. To explain the importance of these terms, let us quickly take a look at an example of how the bridge affects us. 
+
+When React Native communicates between the Javascript and native layers, it uses batched messages that it sends through the asynchronous bridge. This means that if you want (or are forced to, in some cases) to access some value synchronously from one layer or another, it has to be available in that particular layer. In some cases this means a value has to be duplicated on both sides of the bridge and has to be synchronized using a call through the bridge. However, when a value exists on both sides of the bridge, we need some mechanism that will be able to determine which of the two values is the most-up-to-date one. 
+
+As an example, let us consider the textinput component on ios. Because of the design of the platform, the value entered in the textfield has to live in UIKit. We would, however, like to be able to control and read the text input’s value from Javascript synchronously. Imagine a text field into which we start typing “ABC” as input. At time 1, the native UI thread sends the first letter to the JS thread. The JS thread, however, doesn’t pick up the value until the next run of its execution loop. At time 2, user enters B and the UI thread sends the value “AB” is sent to the JS queue. At the same time, the textfield value is set to “A” in response to the update sent from the JS thread. At time 3, user enters C and so the UI thread sends “AC” to the JS queue. At the same time the value “AB” that JS just received is sent through the bridge. In the end, the JS thread receives “AC” and sends it again through the bridge. Both the native and JavaScript layers contain the same value - “AC” but the character “B” has been dropped! The solution implemented in RN involves a counter of input events of the text field which is sent through the bridge and the value of the textfield is not changed unless the counter number received from JS is higher than the one stored in the native layer.
+
+This gives us understanding of the Javascript layer, native layer and the asynchronous bridge. This also explains some unexpected effects that a developer may meet when working with native UI controls.
+
+
+\begin{figure}
 	\begin{forest}
 		for tree={
 			font=\ttfamily,
@@ -101,11 +112,14 @@ As I explained earlier, React app is composed of a tree of components where prop
 
 
 \section{Upload Module}
-Upload module is a native module made to allow users to upload files to Memsource Cloud and create jobs from them. There are important differences in its iOS and Android implementations, but both expose the same interfaces to the JavaScript layer. When talking about the file handling in the native module, I will use the singular form for simplicity, but note the upload module has capabilities for uploading multiple files.
+Upload module is a native module made to allow users to upload files to Memsource Cloud and create jobs from them. It offers different ways to select the files and allows to set up various import options. After the upload is triggered, a new item representing the ongoing upload is added to the job list. A notification and a network activity indicator on Android and on iOS, respectively, inform the user of the upload status. 
+
+There are important differences in the iOS and Android implementations, but both expose the same interfaces to the JavaScript layer. When talking about file handling in the native module, I will use the singular form for simplicity, but note the upload module has capabilities for uploading multiple files.
+
 
 
 \subsection{Android}
-To upload a file as a job, user has to either start the app and navigate to the “add job” screen and select the files for upload from a file picker or start the app externally by opening a file using the Memsource app, for example from the Gmail app or a file browser. 
+To upload a file as a job, user has to either start the app and navigate to the “add job” screen and select the files for upload from a file picker, or start the app "externally" by opening a file using the Memsource app, for example from the Gmail app or a file browser. 
 In both cases, the app receives a uri which points to the file. Note that the file doesn't necessarily need to be on the device, it may as well come from a cloud storage such as OneDrive or Google Drive. The user then sets up various options for the import and taps the “send” button. 
 Upon pressing the button, the necessary information consisting of the selected file, upload URL and token is passed to the upload module and upload is started. At the same time, a new item is added to the job list. This item is displayed at the top of the list and, along with a notification, informs user of the running upload.
 
@@ -115,20 +129,19 @@ The module runs a background service whose responsibilities are issuing a notifi
 Once done, it issues a final notification or, if the user checked the pre-translation checkbox at job upload screen, continues with pre-translation based on project settings. This is another operation that can possibly be long-running and the native module keeps polling the \texttt{Asynchronous API} to check the pre-translation status until it is confirmed. At that point it issues the final notification.
 
 
-The service repeats its download and upload requests if there was an error. The service is also made to run in the background so that its actions are not disrupted in case the user switches to a different app or even “kills” the app by swiping it away from the screen. The upload service also stores the results of uploads in SharedPreferences.
+The service repeats its download and upload requests if there was an error and is also made to run in the background so that its actions are not disrupted in case the user switches to a different app or even “kills” the app by swiping it away from the screen. The upload service also stores the results of uploads in SharedPreferences so that the application can be updated when it is killed and the job creation finishes in background.
 If the app is still running at the time when the job creation is confirmed, an event is sent to JavaScript and the views are updated. If that is not the case, the response of job creation is processed the next time the app is started. If creation was successful the item which was previously added to the top of the job list is removed and the job data is re-fetched. In case of an error, the item is not removed but instead gives user an option to repeat the upload. The native module is written in Java. 
  
 
 \subsection{iOS}
-On iOS, the module provides the same functionality but behaves very differently internally. iOS is much stricter about how background tasks are handled. There is a lot less that needs to be taken care of by the developer and more is taken care of by iOS. This gives the developer a lot less flexibility (this also resulted in a problem with the API) but also results in less coding. The job creation on iOS works in the following way: similarly to Android, files can be selected within the app or sent to the app from an outside application such as iCloud. If a files comes from a remote location, iOS automatically downloads it and saves it to the app’s sandbox from where it is removed when the application exits. The file also has to be uploaded using the API which returns a async id and \texttt{Asynchronous API} is then queried for import status. For the purposes of background tasks, iOS offers the NSURLSession object. Background upload is possible using the uploadTask. However, the developer is not responsible for the upload handling, this is entirely handled by the iOS itself, including possible repeats in case the upload fails. 
+On iOS, the module provides the same functionality but behaves very differently internally. iOS is much stricter about how background tasks are handled. There are fewer things that needs to be taken care of by the developer and more that are taken care of by iOS. This gives the developer a lot less flexibility (this also resulted in a problem with the API) but also results in less coding. The job creation on iOS works in the following way: similarly to Android, files can be selected within the app or sent to the app from an outside application such as iCloud. If a file is selected using the Document Picker, iOS automatically downloads (if needed) and saves it to the app’s sandbox from where it is removed when the application exits. In case of importing the file from other application such as Mail, the file is copied to app's sandbox and the application receives the url of the file. In the latter case, removing the file is the developer's responsibility.
+
+Originally, I wanted to use the same approach for creating job as on Android, but it turned out not to be suitable because it is not possible to upload a file using the \texttt{multipart/form-data} request; a file uploaded by iOS's background upload task is sent directly in the body of the request and having a custom request body is impossible unless we write it directly into the file (which cannot be considered a good practice). Possible workaround here is to use another Memsource API, the File API which allows to upload a file in the request body and returns a file ID which can be used in other API calls. The problem with this approach is that we would need to make two api calls to make the job import happen: first to upload the file and second to call the Create Job api. This poses a possible issue since iOS may decide to not perform our background request. 
+
+iOS uses several pieces of information to decide whether or not a request will be carried out. The decision involves eg. how of often the app is used by the phone's owner or what the battery level is. The exact algorithm is not publicly available. It may therefore happen that the first request for file upload will be honored but the second request for actually creating the job may be ignored. The best possible solution to this is implementing another API which would accept the file in the request body and the numerous parameters sent to the the create job api would be sent as a json string in a special request header. For the time being, I have implemented the described workaround and a better solution on the server side may be implemented later. 
 
 
-Once the file is uploaded, the app is notified about this event by the delegates todo method being called. 
-
-
-The problem with todo method is that it is not possible to upload a file using the \texttt{multipart/form-data} type; the file uploaded by iOS is sent directly in the body of the request and therefore having a custom request body is impossible unless we write the multipart data directly into the file (which cannot be considered a good practice). Possible workaround here is to use another Memsource API, the File API which allows to upload a file in the request body and returns a file ID which can be used in other API calls. The problem with this approach is that we would need to make two api calls to make the job import happen: first to upload the file and second to call the Create Job api. This poses a possible issue since iOS may decide to not perform our background request. 
-
-iOS uses several pieces of information to decide whether or not a request will be carried out. The decision involves eg. how of often the app is used by the phone's owner or what the battery level is. The exact algorithm is not publicly available. It may therefore happen that the first request for file upload will be honored but the second request for actually creating the job may be ignored. The best possible solution to this is implementing another API which would accept the file in the request body and the numerous parameters sent to the the create job api would be sent as a json string in a special request header. For the time being, I have implemented the described workaround and a better solution on the server side may be implemented later. The iOS native module is written in Swift 3.
+Similarly to Android, as the upload starts, all of its information including the user who started the upload and the project ID is serialized and stored to UserPreferences entry and is updated whenever the status of the upload or import changes. This way the information is not lost when the app is killed during or after the import and the information about whether an upload was successful can be processed the next time the app starts: if the import was requested on the server, the job entry is removed from the job list. If the upload did not finish or if the import wasn't requested, the item is kept in the list and flagged it as a failed import. The iOS native module is written in Swift 3.
 
 
 \section{State Persistence}
@@ -146,6 +159,8 @@ State is serialized upon switching the app into the background. Serializr output
 Communication with the Memsource API requires the user to enter their username and password. The app then asks for a token which is used for the requests to follow. The token validity is limited to 24 hours and the app therefore needs to request a new one once the current token's validity is approaching its expiration date. To be able to ask for a new token, the app needs to have the user credentials at its disposal, and persist them so that it doesn't need to repeatedly ask the user to enter them. Such storage, obviously, needs to be safe and the AsyncStorage used for state persistence does not meet the safety criteria. To store the user credentials, I used a package which internally uses Keychain on iOS and an encrypted SharedPreferences entry on Android. I authored the Android part of the package which is now available as react-native-keychain on npm. 
 
 \section{Data Fetching}
+
+Application fetches all data through the publicly available Memsource REST API, whose relevant parts used in the application are attached in appendix. The data is provided in JSON (JavaScript Object Notation) which makes it easy to work with, given that the app is written in JavaScript. The API uses standard HTTP response codes to denote operation result and provides error description when a request is incorrect.
 
 There are some common patterns related to data fetching arising throughout the app. In many places we need to display some data, be able to reload it (using the well known pull down gesture), and be able to load more of the content and append it to the existing data (informally known as infinite loading).
 
@@ -231,13 +246,29 @@ At the time when I started working on the project, the new solution to navigatio
 
 \section{Issues}
 
-There were a number of issues encountered throughout the development, caused by different factors such as React Native's immaturity and frequent releases where new version is shipped every other week and updating is not always straightforward due to breaking changes (although this is changing to one release per month as of January 2017), lack of quality documentation, or my effort to create a partially different UIs on each platform so that the user experience is on par with what the user would get in an application designed specifically for iOS or Android. This sometimes led to dead ends such as when I had to replace the entire navigation solution for a new one. Navigation as a whole is an interesting topic, which is why I devoted an entire section to it.
+There were a number of issues encountered throughout the development, caused by different factors such as React Native's immaturity and frequent releases where new version is shipped every other week and updating is not always straightforward due to breaking changes (although this is changing to one release per month as of January 2017), lack of quality documentation, or my effort to create partially different UIs on each platform so that the user experience is on par with what the user would get in an application designed specifically for iOS or Android. This sometimes led to dead ends such as when I had to replace the entire navigation solution for a new one. Navigation as a whole is an interesting topic, which is why I devoted an entire section to it.
 Another issue is minor differences in behavior on each platform -- the component appearance on iOS may not always be the same as the one on Android. This involves borders, border radius or animations. However, given React Native's complexity --- the library uses JavaScript, Java, Objective-C, C++ and also C --- it does a very good job in abstracting the platform away.
-Other very painful issue, although visible only when rendering large UIs, are animations which are controlled from the JavaScript thread. This means that the JavaScript thread has to periodically send commands to the native layer for the animation to run. If the JavaScript thread has too much work on it, issuing the command is delayed and the result is a laggy animation. This issue, however, is already partially solved and offloading the animations from the JavaScript thready will probably be fully functional in the first months of 2017. 
+Other very painful issue, although visible only when rendering large UIs, are animations which are controlled from the JavaScript thread. This means that the JavaScript thread has to periodically send commands to the native layer for the animation to run. If the JavaScript thread has too much work on it, issuing the command is delayed and the result is a laggy animation. This issue, however, is already partially solved and offloading the animations from the JavaScript thready will probably be fully functional in the first months of 2017.
+
+Other difficulties were met in working with files (uploading and downloading jobs), since this needed to be done once for each platform and involved coding in Java as well as Objective C and Swift. Working with files has many hidden culprits given by different behavior on older Android versions, file permission issues and problems resulting from different file sources - ie. files imported from other applications vs form UIDocumentPicker on iOS.
 %Also, the fact that React Native is not a framework gives developer the freedom to do things in different ways, which also means that the first way a developer reaches for does not always turn out to be the best one. 
 
-Throughout the development of the application, I have contributed to the following projects by bug fixes or code and documentation improvements: react-native-keychain, mobx-utils, react-native-scrollable-tab-view, ex-navigation, react-native-router-flux, serializr, react-native-android-checkbox, mobx, react-native. 
+
+\section{Open Source Software Contributions}
+
+Throughout the development of the application, I have contributed to different projects by bug fixes or code and documentation improvements. The projects include: 
 
 
-
-
+\begin{itemize}
+\item react-native-keychain
+\item mobx-utils
+\item react-native-scrollable-tab-view
+\item ex-navigation
+\item react-native-router-flux
+\item serializr
+\item mobx
+\item react-native
+\item react-native-android-kit
+\item react-native-radio-button-android
+\item react-native-android-checkbox
+\end{itemize}

@@ -1,0 +1,493 @@
+<div id="content">
+			<span id="mwext-bc" class="noprint plainlinks breadcrumbs">Navigation trail: <a href="/index.php?title=Special%3ASearch&amp;search=TransMemSave&amp;go=Go">Special:Search</a> » <a href="/wiki/Price_List_API_v2">Price List API v2</a> » <a href="/wiki/Job_API_v8">Job API v8</a> » <a href="/wiki/Memsource_API">Memsource API</a> » <a href="/wiki/Project_API_v3">Project API v3</a> </span><a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Project API v3</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+				<!-- tagline -->
+				<h3 id="siteSub">From Memsource</h3>
+				<!-- /tagline -->
+				<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="#mw-head">navigation</a>,
+					<a href="#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodytext -->
+				<table id="toc" class="toc"><tbody><tr><td><div id="toctitle"><h2>Contents</h2> <span class="toctoggle">[<a id="togglelink" class="internal" href="javascript:toggleToc()">hide</a>]</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Assign_Vendor"><span class="tocnumber">1</span> <span class="toctext">Assign Vendor</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Create_New_Project"><span class="tocnumber">2</span> <span class="toctext">Create New Project</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Create_New_Project_From_Template"><span class="tocnumber">3</span> <span class="toctext">Create New Project From Template</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Clone_Project"><span class="tocnumber">4</span> <span class="toctext">Clone Project</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Edit_Project"><span class="tocnumber">5</span> <span class="toctext">Edit Project</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Delete_Project"><span class="tocnumber">6</span> <span class="toctext">Delete Project</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Get_Project_Info"><span class="tocnumber">7</span> <span class="toctext">Get Project Info</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#Set_Status"><span class="tocnumber">8</span> <span class="toctext">Set Status</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#Set_Translation_Memories"><span class="tocnumber">9</span> <span class="toctext">Set Translation Memories</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#Get_Translation_Memories"><span class="tocnumber">10</span> <span class="toctext">Get Translation Memories</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="#Set_Term_Bases"><span class="tocnumber">11</span> <span class="toctext">Set Term Bases</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="#Get_Term_Bases"><span class="tocnumber">12</span> <span class="toctext">Get Term Bases</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="#List_Projects"><span class="tocnumber">13</span> <span class="toctext">List Projects</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="#Edit_Access_.26_Security_Settings"><span class="tocnumber">14</span> <span class="toctext">Edit Access &amp; Security Settings</span></a></li>
+<li class="toclevel-1 tocsection-15"><a href="#Edit_Quality_Assurance_Settings"><span class="tocnumber">15</span> <span class="toctext">Edit Quality Assurance Settings</span></a></li>
+</ul>
+</td></tr></tbody></table><script>if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<h3> <span class="mw-headline" id="Assign_Vendor"> Assign Vendor </span></h3>
+<pre><b>action: api/v3/project/assignVendor</b>
+    token                       string
+    project                     domain(Project)
+    vendor                      domain(Vendor)
+    dateDue                     datetime                           O
+
+<b>response: empty</b>
+</pre>
+<h3> <span class="mw-headline" id="Create_New_Project"> Create New Project </span></h3>
+<pre><b>action: api/v3/project/create</b>
+    token                       string
+    name                        string                             
+    sourceLang                  locale
+    targetLang                  list(locale)
+    client                      domain(Client)                     O
+    businessUnit                domain(BusinessUnit)               O
+    domain                      domain(Domain)                     O
+    subDomain                   domain(SubDomain)                  O
+    dateDue                     datetime                           O
+    note                        string                             O
+    machineTranslateSettings    domain(MachineTranslateSettings)   O
+    workflowStep                list(domain(WorkflowStep))         O
+    useDefaultProjectSettings   boolean                            O(false)
+
+<b>response: JSON</b>
+    {
+      "id": 238                 // id of the new project
+    }
+</pre>
+<h3> <span class="mw-headline" id="Create_New_Project_From_Template"> Create New Project From Template </span></h3>
+<pre><b>action: api/v3/project/createFromTemplate</b>
+    token                       string
+    template                    domain(ProjectTemplate)
+    name                        string                             
+    dateDue                     datetime                           O
+    note                        string                             O
+    sourceLang                  string                             O   // overrides template data
+    targetLang                  list(string)                       O   // overrides template data
+    workflowStep                list(domain(WorkflowStep))         O   // overrides template data
+
+<b>response: JSON</b>
+    {
+      "id": 238                 // id of the new project
+    }
+</pre>
+<h3> <span class="mw-headline" id="Clone_Project"> Clone Project </span></h3>
+<pre><b>action: api/v3/project/clone</b>
+    token                       string
+    project                     domain(Project)
+    name                        string                             
+
+<b>response: JSON</b>
+    {
+      "id": 238                 // id of the new project
+    }
+</pre>
+<h3> <span class="mw-headline" id="Edit_Project"> Edit Project </span></h3>
+<pre><b>action: api/v3/project/edit</b>
+    token                       string
+    project                     domain(Project)
+    name                        string                             O
+    status                      enum(ProjectStatus)                O
+    targetLang                  list(locale)                       O    // adds target languages (existing cannot be removed)
+    client                      domain(Client)                     O N
+    businessUnit                domain(BusinessUnit)               O N
+    domain                      domain(Domain)                     O N
+    subDomain                   domain(SubDomain)                  O N
+    dateDue                     datetime                           O N
+    note                        string                             O N
+    machineTranslateSettings    domain(MachineTranslateSettings)   O N
+    workflowStep                list(domain(WorkflowStep))         O   // adds workflow steps (existing cannot be removed)
+    owner                       domain(User)                       O
+
+<b>response: empty</b>
+</pre>
+<h3> <span class="mw-headline" id="Delete_Project"> Delete Project </span></h3>
+<pre><b>action: api/v3/project/delete</b>
+    token                       string
+    project                     domain(Project)
+    purge                       boolean             O(false)
+
+<b>response: empty</b>
+</pre>
+<h3> <span class="mw-headline" id="Get_Project_Info"> Get Project Info </span></h3>
+<pre><b>action: api/v3/project/get</b>
+    token                       string
+    project                     domain(Project)
+
+<b>response: JSON</b>
+    {
+      "id":129,
+      "internalId":5,
+      "name":"set completed (1)",
+      "status":"NEW",
+      "sourceLang":"en",
+      "targetLangs":[
+        "cs",
+        "de"
+      ],
+      "dateDue":null,
+      "dateCreated":"2016-03-10T14:22:10+0000",
+      "createdBy": {
+         "id": 501,
+         "userName": "admin",
+         "email": "support@memsource.com"
+      }
+      "note":null,
+      "machineTranslateSettings":null,
+      "workflowSteps":[
+        {
+          "abbr":"T",
+          "id":1,
+          "level":1,
+          "name":"Translation"
+        },
+        {
+          "abbr":"R",
+          "id":2,
+          "level":2,
+          "name":"Revision"
+        }
+      ],
+      "client":null,
+      "businessUnit": {
+         "id":5,
+         "name":"BU Name"
+      }
+      "domain":null,
+      "subDomain":null,
+      "langSettings":[
+        {
+          "targetLang":"cs",
+          "machineTranslateSettings":{
+            "id":2,
+            "name":"Microsoft with Feedback",
+            "type":"MicrosoftTranslatorWithFeedback",
+            "default":false
+          }
+        },
+        {
+          "targetLang":"de",
+          "machineTranslateSettings":{
+            "id":8,
+            "name":"apert",
+            "type":"Apertium",
+            "default":true
+          }
+        }
+      ],
+      "qualityAssuranceSettings": {
+        "emptyTranslation":true,
+        "inconsistentTranslation":true,
+        "joinTags":true,
+        "missingNumbers":true,
+        "segmentNotConfirmed":true,
+        "terminology":true,
+        "multipleSpaces":true,
+        "trailingSpace":true,
+        "trailingPunctuation":false,
+        "targetLength": {
+          "enabled": true,
+          "max": 1000
+        },
+        "formatting":true,
+        "unresolvedComment":true,
+        "emptyPairTags":true,
+        "strictJobStatus":false,
+        "forbiddenStrings": {
+          "enabled": false,
+          "list": []
+        },
+        "excludeLockedSegments":false,
+        "ignoreNotApprovedTerms":false,
+        "spellCheck":true,
+        "repeatedWords":true,
+        "inconsistentTagContent":true,
+        "emptyTagContent":true,
+        "xliffTags":true,
+        "forbiddenTerms":false,
+        "targetLengthPercent" {
+          "enabled": false,
+          "max": 120.0
+        },
+        "targetLengthPerSegment":true,
+        "newerAtPrecedingWorkflowStep":true,
+        "leadingAndTrailingSpaces":true
+      },
+      "accessSettings: {
+        "downloadEnabled":true,
+        "webEditorEnabledForLinguists":true,
+        "showUserDataToLinguists":true,
+        "emailNotifications":true,
+        "strictWorkflowFinish":false,
+        "useVendors":false
+      }      
+    }
+</pre>
+<h3> <span class="mw-headline" id="Set_Status"> Set Status </span></h3>
+<pre><b>action: api/v3/project/setStatus</b>
+    token                       string
+    project                     domain(Project)
+    status                      enum(ProjectStatus)
+
+<b>response: empty</b>
+</pre>
+<h3> <span class="mw-headline" id="Set_Translation_Memories"> Set Translation Memories </span></h3>
+<pre><b>action: api/v3/project/setTransMemories</b>
+    token                       string
+    project                     domain(Project)
+    readTransMemory             list(domain(TransMemory))  O
+    writeTransMemory            list(domain(TransMemory))  O    // write translation memory must be included in the read translation memories, too; max 2 write TMs allowed
+    penalty                     list(double)               O    // a list of penalties for each read translation memory
+    targetLang                  locale                     O    // set translation memories only for the specific project target language
+    workflowStep                domain(WorkflowStep)       O    // set translation memories only for the specific workflow step
+
+<b>response: empty</b>
+</pre>
+<h3> <span class="mw-headline" id="Get_Translation_Memories"> Get Translation Memories </span></h3>
+<pre><b>action: api/v3/project/getTransMemories</b>
+    token                       string
+    project                     domain(Project)
+
+<b>response: JSON</b>
+   [
+     {
+       "writeMode":true,
+       "transMemory":{
+         "id":1,
+         "targetLangs":[
+           "de"
+         ],
+         "sourceLang":"en",
+         "name":"transMem"
+       },
+       "targetLang":"de",
+       "penalty":0,
+       "readMode":true,
+       "workflowStep":null
+     }
+   ]
+</pre>
+<h3> <span class="mw-headline" id="Set_Term_Bases"> Set Term Bases </span></h3>
+<pre><b>action: api/v3/project/setTermBases</b>
+    token                       string
+    project                     domain(Project)
+    readTermBase                list(domain(TermBase))     O
+    writeTermBase               domain(TermBase)           O    // write term base must be included in the read term bases
+    qualityAssuranceTermBase    list(domain(TermBase))     O    // QA term bases must be included in the read term bases
+    targetLang                  locale                     O    // set term bases only for the specific project target language
+
+<b>response: empty</b>
+</pre>
+<h3> <span class="mw-headline" id="Get_Term_Bases"> Get Term Bases </span></h3>
+<pre><b>action: api/v3/project/getTermBases</b>
+    token                       string
+    project                     domain(Project)
+
+<b>response: JSON</b>
+   [
+     {
+       "writeMode":true,
+       "termBase":{
+         "id":1,
+         "langs":[
+           "de", "en"
+         ],
+         "name":"termBase"
+       },
+       "targetLang":"de",
+       "readMode":true,
+       "workflowStep":null
+     }
+   ]
+</pre>
+<h3> <span class="mw-headline" id="List_Projects"> List Projects </span></h3>
+<pre><b>action: api/v3/project/list</b>
+    token                       string
+    page                        integer                    O(0)
+    name                        string                     O
+    client                      string                     O
+    businessUnit                string                     O
+    status                      list(enum(ProjectStatus))  O
+    targetLang                  list(locale)               O
+    domain                      string                     O
+    subDomain                   string                     O
+    costCenter                  string                     O
+    dueInHours                  integer                    O
+    createdInLastHours          integer                    O
+    sourceLang                  list(locale)               O
+    owner                       domain(User)               O
+
+<b>response: JSON</b>
+   [
+     {
+       "id":1,
+       "uid":"cU19tI7NPTOI8y3Ot4VbE7",
+       "internalId":1,
+       "name":"project",
+       "status":"NEW",
+       "sourceLang":"en",
+       "targetLangs":[
+         "cs",
+         "de"
+       ],
+       "dateDue":null,
+       "dateCreated":"2016-09-02T08:40:00+0000",
+       "note":null,
+       "machineTranslateSettings":null,
+       "workflowSteps":[
+   
+       ],
+       "client":null,
+       "businessUnit":{
+         "id":1,
+         "name":"businessUnit"
+       },
+       "domain":null,
+       "subDomain":null,
+       "langSettings":[
+   
+       ],
+       "createdBy":{
+         "deleted":false,
+         "active":true,
+         "userName":"admin",
+         "firstName":"admin",
+         "id":1,
+         "lastName":"test",
+         "role":"ADMIN",
+         "email":"test@test.com"
+       },
+       "qualityAssuranceSettings":{
+         "emptyTranslation":true,
+         "inconsistentTranslation":true,
+         "joinTags":true,
+         "missingNumbers":true,
+         "segmentNotConfirmed":true,
+         "terminology":true,
+         "multipleSpaces":true,
+         "trailingSpace":true,
+         "trailingPunctuation":false,
+         "targetLength":{
+           "enabled":false,
+           "max":1000
+         },
+         "formatting":true,
+         "unresolvedComment":true,
+         "emptyPairTags":true,
+         "strictJobStatus":false,
+         "forbiddenStrings":{
+           "enabled":false,
+           "list":[
+   
+           ]
+         },
+         "excludeLockedSegments":false,
+         "ignoreNotApprovedTerms":false,
+         "spellCheck":true,
+         "repeatedWords":true,
+         "inconsistentTagContent":true,
+         "emptyTagContent":true,
+         "xliffTags":true,
+         "forbiddenTerms":false,
+         "targetLengthPercent":{
+           "enabled":false,
+           "max":130.0
+         },
+         "targetLengthPerSegment":true,
+         "newerAtPrecedingWorkflowStep":true,
+         "leadingAndTrailingSpaces":true,
+         "ignoreInAllWorkflowSteps":false,
+         "regexp":{
+           "source":null,
+           "target":null
+         }
+       },
+       "analyseSettings":{
+         "type":"PreAnalyse",
+         "includeFuzzyRepetitions":true,
+         "includeConfirmedSegments":true,
+         "includeNumbers":true,
+         "includeLockedSegments":true,
+         "countSourceUnits":true,
+         "includeTransMemory":true,
+         "compareWorkflowLevel":null
+       }
+     }
+   ]
+</pre>
+<h3> <span class="mw-headline" id="Edit_Access_.26_Security_Settings"> Edit Access &amp; Security Settings </span></h3>
+<pre><b>action: api/v3/project/editAccessSettings</b>
+    token                                 string
+    project                               domain(Project)
+    translationMemoryDownloadEnabled      boolean          O
+    webEditorEnabledForLinguists          boolean          O
+    showUserDataToLinguists               boolean          O
+    emailNotifications                    boolean          O
+
+<b>response: empty</b>
+</pre>
+<h3> <span class="mw-headline" id="Edit_Quality_Assurance_Settings"> Edit Quality Assurance Settings </span></h3>
+<pre><b>action: api/v3/project/editQualityAssuranceSettings</b>
+    token                                 string
+    project                               domain(Project)
+    emptyTranslation                      boolean          O
+    inconsistentTranslation               boolean          O
+    joinTags                              boolean          O
+    missingNumbers                        boolean          O
+    segmentNotConfirmed                   boolean          O
+    terminology                           boolean          O
+    multipleSpaces                        boolean          O
+    trailingSpace                         boolean          O
+    trailingPunctuation                   boolean          O
+    targetLengthMax                       integer          O
+    formatting                            boolean          O
+    unresolvedComment                     boolean          O
+    emptyPairTags                         boolean          O
+    strictJobStatus                       boolean          O    // linguists may not set jobs with unresolved QA warnings to Completed
+    forbiddenString                       list(string)     O
+    excludeLockedSegments                 boolean          O
+    ignoreNotApprovedTerms                boolean          O
+    spellCheck                            boolean          O
+    repeatedWords                         boolean          O
+    inconsistentTagContent                boolean          O
+    emptyTagContent                       boolean          O
+    xliffTags                             boolean          O
+    forbiddenTerms                        boolean          O
+    targetLengthPercent                   double           O
+    targetLengthPerSegment                boolean          O
+    newerAtPrecedingWorkflowStep          boolean          O
+    leadingAndTrailingSpaces              boolean          O
+
+<b>response: empty</b>
+</pre>
+<!-- 
+NewPP limit report
+Preprocessor node count: 58/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key memsource_com3:pcache:idhash:304-0!1!0!!en!2!edit=0 and timestamp 20170103080448 -->
+<div class="printfooter">
+Retrieved from "<a href="http://wiki.memsource.com/wiki/Project_API_v3">http://wiki.memsource.com/wiki/Project_API_v3</a>"</div>
+				<!-- /bodytext -->
+								<!-- catlinks -->
+				<div id="catlinks" class="catlinks catlinks-allhidden"></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+			</div>
+			<!-- /bodyContent -->
+		</div>

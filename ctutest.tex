@@ -96,7 +96,7 @@ This document describes development of an mobile application which will enable t
 
 % Acknowledgements / Podekovani
 \begin{thanks}
-Děkuji ČVUT, že mi je tak dobrou \emph{alma mater}.
+I would like to thank my parents for their continuous support throughout my studies. I would also like to express my thanks to Memsource, s.r.o. for the thesis topic and the opportunity to work with cutting-edge technologies.
 \end{thanks}
 
 % Declaration / Prohlaseni
@@ -116,12 +116,16 @@ V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 \usepackage[utf8]{inputenc} % Unicode support (Umlauts etc.)
 \usepackage{hyperref} % Add a link to your document
 \usepackage{graphicx} % Add pictures to your document
-%\usepackage{listings} % Source code formatting and highlighting
+%\usepackage{listings} % Source code formatting and highlighting,
 \usepackage{enumitem}
 \usepackage{float}
 
+% http://tex.stackexchange.com/questions/6423/latex-equivalent-of-pre
+\usepackage{alltt}
+
 %folder and file listing
 \usepackage{forest}
+
 
 \definecolor{folderbg}{RGB}{124,166,198}
 \definecolor{folderborder}{RGB}{110,144,169}
@@ -135,7 +139,6 @@ V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 		(-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
 	}
 }
-%
 
 % http://tex.stackexchange.com/questions/37581/latex-figures-side-by-side
 
@@ -284,9 +287,15 @@ V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 
 \appendix
 
+\input{appendices/walkthrough}
+\input{appendices/projectApi}
+\input{appendices/jobApi}
+
 \printindex
 
 \appendix
+
+
 
 \bibliographystyle{amsalpha}
 \bibliography{ctutest}

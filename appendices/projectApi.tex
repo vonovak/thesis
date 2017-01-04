@@ -1,0 +1,221 @@
+\chapter{Used API Calls}
+The entire API documentation can be found at \href{http://wiki.memsource.com/wiki/Memsource_API#API_Reference}{''Memsource wiki''}. This appendix lists only the APIs used by the mobile application. The documentation is shown in a slightly simplified manner (without comments).
+
+\section{Project API}
+
+\subsection{Create Project API}
+
+\begin{alltt}
+\textbf{action: api/v3/project/create}
+token                       string
+name                        string                             
+sourceLang                  locale
+targetLang                  list(locale)
+client                      domain(Client)                     O
+businessUnit                domain(BusinessUnit)               O
+domain                      domain(Domain)                     O
+subDomain                   domain(SubDomain)                  O
+dateDue                     datetime                           O
+note                        string                             O
+machineTranslateSettings    domain(MachineTranslateSettings)   O
+workflowStep                list(domain(WorkflowStep))         O
+useDefaultProjectSettings   boolean                            O
+
+\textbf{response: JSON}
+\{
+	"id": 238                
+\}
+\end{alltt}
+
+
+\subsection{Create New Project From Template}
+\begin{alltt}
+\textbf{action: api/v3/project/createFromTemplate}
+token                       string
+template                    domain(ProjectTemplate)
+name                        string                             
+dateDue                     datetime                           O
+note                        string                             O
+sourceLang                  string                             O
+targetLang                  list(string)                       O
+workflowStep                list(domain(WorkflowStep))         O
+
+\textbf{response: JSON}
+\{
+	"id": 238                 
+\}
+\end{alltt}
+
+\subsection{Edit Project}
+\begin{alltt}
+\textbf{action: api/v3/project/edit}
+token                       string
+project                     domain(Project)
+name                        string                             O
+status                      enum(ProjectStatus)                O
+targetLang                  list(locale)                       O
+client                      domain(Client)                     O N
+businessUnit                domain(BusinessUnit)               O N
+domain                      domain(Domain)                     O N
+subDomain                   domain(SubDomain)                  O N
+dateDue                     datetime                           O N
+note                        string                             O N
+machineTranslateSettings    domain(MachineTranslateSettings)   O N
+workflowStep                list(domain(WorkflowStep))         O
+owner                       domain(User)                       O
+
+\textbf{response: empty}
+\end{alltt}
+
+\subsection{Delete Project}
+\begin{alltt}
+\textbf{action: api/v3/project/delete}
+token                       string
+project                     domain(Project)
+purge                       boolean             O(false)
+
+\textbf{response: empty}
+\end{alltt}
+
+\subsection{Get Translation Memories}
+\begin{alltt}
+\textbf{action: api/v3/project/getTransMemories}
+token                       string
+project                     domain(Project)
+
+\textbf{response: JSON}
+[
+\{
+	"writeMode":true,
+	"transMemory":{
+		"id":1,
+		"targetLangs":[
+		"de"
+		],
+		"sourceLang":"en",
+		"name":"transMem"
+	},
+	"targetLang":"de",
+	"penalty":0,
+	"readMode":true,
+	"workflowStep":null
+\}
+]
+\end{alltt}
+
+\subsection{Set Translation Memories}
+\begin{alltt}
+\textbf{action: api/v3/project/setTransMemories}
+token                       string
+project                     domain(Project)
+readTransMemory             list(domain(TransMemory))  O
+writeTransMemory            list(domain(TransMemory))  O
+penalty                     list(double)               O
+targetLang                  locale                     O
+workflowStep                domain(WorkflowStep)       O
+
+\textbf{response: empty}
+\end{alltt}
+
+
+\subsection{Get Term Bases}
+\begin{alltt}
+\textbf{action: api/v3/project/getTermBases}
+token                       string
+project                     domain(Project)
+
+\textbf{response: JSON}
+[
+\{
+	"writeMode":true,
+	"termBase":{
+		"id":1,
+		"langs":[
+		"de", "en"
+		],
+		"name":"termBase"
+	},
+	"targetLang":"de",
+	"readMode":true,
+	"workflowStep":null
+\}
+]
+\end{alltt}
+
+
+\subsection{Set Term Bases}
+\begin{alltt}
+\textbf{action: api/v3/project/setTermBases}
+token                       string
+project                     domain(Project)
+readTermBase                list(domain(TermBase))     O
+writeTermBase               domain(TermBase)           O
+qualityAssuranceTermBase    list(domain(TermBase))     O
+targetLang                  locale                     O
+
+\textbf{response: empty}
+\end{alltt}
+
+
+\subsection{List Projects}
+\begin{alltt}
+\textbf{action: api/v3/project/list}
+token                       string
+page                        integer                    O(0)
+name                        string                     O
+client                      string                     O
+businessUnit                string                     O
+status                      list(enum(ProjectStatus))  O
+targetLang                  list(locale)               O
+domain                      string                     O
+subDomain                   string                     O
+costCenter                  string                     O
+dueInHours                  integer                    O
+createdInLastHours          integer                    O
+sourceLang                  list(locale)               O
+owner                       domain(User)               O
+
+\textbf{response: JSON}
+[
+{
+	"id":1,
+	"uid":"cU19tI7NPTOI8y3Ot4VbE7",
+	"internalId":1,
+	"name":"project",
+	"status":"NEW",
+	"sourceLang":"en",
+	"targetLangs":[
+	"cs",
+	"de"
+	],
+	"dateDue":null,
+	"dateCreated":"2016-09-02T08:40:00+0000",
+	"note":null,
+	"machineTranslateSettings":null,
+	"workflowSteps":[
+	
+	],
+	"client":null,
+	"businessUnit":{
+		"id":1,
+		"name":"businessUnit"
+	},
+	"domain":null,
+	"subDomain":null,
+	"langSettings":[
+	
+	],
+	"createdBy":{
+		"deleted":false,
+		"active":true,
+		"userName":"admin",
+		"firstName":"admin",
+		"id":1,
+		"lastName":"test",
+		"role":"ADMIN",
+		"email":"test@test.com"
+	},
+	...(redacted)
+}
+]
+\end{alltt}

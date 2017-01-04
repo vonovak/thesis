@@ -1,7 +1,7 @@
 
 \chapter{Design}
 
-After analyzing the task and collecting the requirements, this chapter will go through the design of initial paper prototypes as well as higher fidelity software prototypes. I will also describe the architecture of the mobile application which is crucial for successful development, future extensions and maintenance. I will talk about different components that the application is composed of and how they cooperate to achieve desired functionality. Note this chapter contains several UML diagrams, all of which are simplified.
+After analyzing the task and collecting the requirements, this chapter will go through the design of initial paper prototypes as well as higher fidelity software prototypes. I will also describe the architecture of the mobile application which is crucial for successful development, future extensions and maintenance. I will talk about different components that the application is composed of and how they cooperate to achieve desired functionality. This chapter contains several UML diagrams, all of which are simplified.
 
 \section{Application Structure}
 
@@ -25,23 +25,15 @@ The mockups were discussed with employees of Memsource support team. Different i
 In the end, the prototype largely follows the structure of Memsource cloud, but it is simpler in terms of the number of supported options and gives a platform-specific feel. The following pages contain several figures that present selected mockup screens.
 
 
-The very initial design can be seen in figure \ref{mock1}. Its original idea was to be focused on job listing after user login, because the status of translation jobs is, perhaps, the information a PM wants to get. This view would contain jobs from different projects listed together to give an overview of the jobs that need to be completed soon. This idea, however, was turned down because of mixing different projects together and also because there is no such equivalent view in Memsource Cloud, which could confuse the user.
-
-\begin{figure}[H]
-	\includegraphics[width=0.8\textwidth]{pics/projects2}
-	\caption{Initial post-login screen (left). Project list and opening a project would be accessible from the drawer (right).}
-	\label{mock1}
-\end{figure}
-
 
 \begin{figure}[H]
 	\includegraphics[width=0.8\textwidth]{pics/projects1}
-	\caption{The improved mockups showing the project list screens. Second screen shows the chevron active, where user can filter displayed projects.}
+	\caption{Mockups showing the project list screens. Second screen shows the chevron active, where user can filter displayed projects.}
 	\label{mock2}
 \end{figure}
 
 
-Figure \ref{mock2} shows the next design of the project listing. There are controls for creating a project, searching, sorting (using the chevron) and getting the important information about user's projects. In figure \ref{proto1} you can see how filtering the projects changed in the final prototype.
+Figure \ref{mock2} shows the next design of the project listing. There are controls for creating a project, searching, sorting (using the chevron) and getting the important information about user's projects. In figure \ref{fig:proto} you can see how filtering the projects changed in the final prototype.
 
 
 
@@ -98,9 +90,9 @@ The informal testing was conducted in the company offices with two members of Me
 		\centering
 		\includegraphics[width=.74\linewidth]{pics/protoProject1}
 		
-		\label{fig:proto}
 	\end{minipage}
 	\caption{Listing projects (left) and jobs in a project (right).}
+		\label{fig:proto}
 \end{figure}
 
 

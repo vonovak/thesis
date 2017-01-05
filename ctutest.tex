@@ -28,12 +28,13 @@
 %	subfieldofstudy-english = {Mathematical Modelling},
 	fieldofstudy-czech = {Softwarové inženýrství},
 %	subfieldofstudy-czech = {Matematické modelování},
-	keywords-czech = {mobile application development, React Native, Android, iOS, Memsource Cloud},
-	keywords-english = {mobile application development, React Native, Android, iOS, Memsource Cloud},
+	keywords-czech = {vývoj mobilních aplikací, React Native, Android, iOS, Memsource Cloud, Memsource},
+	keywords-english = {mobile application development, React Native, Android, iOS, Memsource Cloud, Memsource},
 	day = 9,
 	month = 1,
 	year = 2017,
 	specification-file = {ctutest-zadani.pdf},
+	pkg-makeidx = true,
 %	front-specification = true,
 %	front-list-of-figures = false,
 %	front-list-of-tables = false,
@@ -108,6 +109,8 @@ Prohlašuji, že jsem předloženou práci vypracoval samostatně, a že jsem uv
 V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 \end{declaration}
 
+
+
 % Only for testing purposes
 \listfiles
 \usepackage[pagewise]{lineno}
@@ -121,7 +124,8 @@ V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 %\usepackage{listings} % Source code formatting and highlighting,
 \usepackage{enumitem}
 \usepackage{float}
-
+\usepackage{tabularx}
+%\usepackage{imakeidx}
 \usepackage[backend=biber]{biblatex}
 % http://tex.stackexchange.com/questions/6423/latex-equivalent-of-pre
 \usepackage{alltt}
@@ -208,7 +212,8 @@ V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 \DeclareCaptionFormat{listing}{\colorbox[cmyk]{.3, .13, 0, 0 }{\parbox{\dimexpr\textwidth-2\fboxsep\relax}{#1\hspace{10pt}#2#3}}}
 
 
-
+% http://tex.stackexchange.com/questions/89166/centering-in-tabularx-and-x-columns
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
 
 \captionsetup[lstlisting]{format=listing, singlelinecheck=true, margin=0pt, font={bf,footnotesize}}
 %% end of for code listings
@@ -235,8 +240,8 @@ V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 \appendix
 
 \input{appendices/walkthrough}
-\input{appendices/projectApi}
-\input{appendices/jobApi}
+%\input{appendices/projectApi}
+%\input{appendices/jobApi}
 
 \printindex
 
@@ -249,6 +254,6 @@ V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 \printbibliography
 %\PrintBibliography
 
-\ctutemplate{specification.as.chapter}
+%\ctutemplate{specification.as.chapter}
 
 \end{document}

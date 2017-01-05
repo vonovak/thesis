@@ -19,7 +19,20 @@
 
 \refsection{0}
   \sortlist[entry]{nty/global}
-    \entry{redux:intro}{misc}{}
+    \entry{rn:bridge}{online}{}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labeltitlesource}{title}
+      \field{title}{Bridging in React Native}
+      \field{urlday}{03}
+      \field{urlmonth}{01}
+      \field{urlyear}{2017}
+      \field{year}{2015}
+      \verb{url}
+      \verb https://tadeuzagallo.com/blog/react-native-bridge/
+      \endverb
+    \endentry
+    \entry{redux:intro}{online}{}
       \name{author}{1}{}{%
         {{hash=a59a3b77b97608e929ef151836f90dd5}{%
            family={Byron},
@@ -39,7 +52,158 @@
       \verb https://www.youtube.com/watch?v=I7IdS-PbEgI
       \endverb
     \endentry
-    \entry{rn:hotreload}{misc}{}
+    \entry{googleAdwords}{online}{}
+      \name{author}{1}{}{%
+        {{hash=cfd6da2f2cd6de39aa15395cc1126664}{%
+           family={Dischler},
+           family_i={D\bibinitperiod},
+           given={Jerry},
+           given_i={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{cfd6da2f2cd6de39aa15395cc1126664}
+      \strng{fullhash}{cfd6da2f2cd6de39aa15395cc1126664}
+      \field{sortinit}{D}
+      \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Building for the next moment}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://adwords.blogspot.com/2015/05/building-for-next-moment.html
+      \endverb
+    \endentry
+    \entry{comscore}{online}{}
+      \name{author}{1}{}{%
+        {{hash=55b5865044f282b0b90ffe4336977ffa}{%
+           family={Inc.},
+           family_i={I\bibinitperiod},
+           given={Comscore},
+           given_i={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{55b5865044f282b0b90ffe4336977ffa}
+      \strng{fullhash}{55b5865044f282b0b90ffe4336977ffa}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{05}
+      \field{title}{Major Mobile Milestones in May: Apps Now Drive Half of All Time Spent on Digital}
+      \field{year}{2014}
+      \verb{url}
+      \verb https://www.comscore.com/Insights/Blog/Major-Mobile-Milestones-in-May-Apps-Now-Drive-Half-of-All-Time-Spent-on-Digital
+      \endverb
+    \endentry
+    \entry{gartner2}{online}{}
+      \name{author}{1}{}{%
+        {{hash=84adcb89b22775633e8ff01bfa1dc6d2}{%
+           family={Inc.},
+           family_i={I\bibinitperiod},
+           given={Gartner},
+           given_i={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{84adcb89b22775633e8ff01bfa1dc6d2}
+      \strng{fullhash}{84adcb89b22775633e8ff01bfa1dc6d2}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Gartner Says Chinese Smartphone Vendors Were Only Vendors in the Global Top Five to Increase Sales in the Third Quarter of 2016}
+      \field{urlday}{04}
+      \field{urlmonth}{01}
+      \field{urlyear}{2017}
+      \verb{url}
+      \verb http://www.gartner.com/newsroom/id/3516317
+      \endverb
+    \endentry
+    \entry{gartner}{online}{}
+      \name{author}{1}{}{%
+        {{hash=84adcb89b22775633e8ff01bfa1dc6d2}{%
+           family={Inc.},
+           family_i={I\bibinitperiod},
+           given={Gartner},
+           given_i={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{84adcb89b22775633e8ff01bfa1dc6d2}
+      \strng{fullhash}{84adcb89b22775633e8ff01bfa1dc6d2}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Gartner Says Worldwide Smartphone Sales Grew 9.7 Percent in Fourth Quarter of 2015}
+      \field{urlday}{18}
+      \field{urlmonth}{05}
+      \field{urlyear}{2016}
+      \field{year}{2016}
+      \verb{url}
+      \verb http://www.gartner.com/newsroom/id/3215217
+      \endverb
+    \endentry
+    \entry{idc:marketShare}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c734d06d826e3a5196843a96274d1973}{%
+           family={Inc.},
+           family_i={I\bibinitperiod},
+           given={IDC},
+           given_i={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{c734d06d826e3a5196843a96274d1973}
+      \strng{fullhash}{c734d06d826e3a5196843a96274d1973}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Smartphone OS Market Share, 2016 Q3}
+      \field{urlday}{04}
+      \field{urlmonth}{01}
+      \field{urlyear}{2017}
+      \verb{url}
+      \verb http://www.idc.com/promo/smartphone-market-share/os
+      \endverb
+    \endentry
+    \entry{kantar}{online}{}
+      \name{author}{1}{}{%
+        {{hash=9254b3165c0dc1de8e21d492f359a428}{%
+           family={Inc.},
+           family_i={I\bibinitperiod},
+           given={Kantar},
+           given_i={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{9254b3165c0dc1de8e21d492f359a428}
+      \strng{fullhash}{9254b3165c0dc1de8e21d492f359a428}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Smartphone OS sales market share}
+      \field{urlday}{01}
+      \field{urlmonth}{06}
+      \field{urlyear}{2016}
+      \field{year}{2016}
+      \verb{url}
+      \verb http://www.kantarworldpanel.com/global/smartphone-os-market-share/
+      \endverb
+    \endentry
+    \entry{statista}{online}{}
+      \name{author}{1}{}{%
+        {{hash=55f4199983a1174dfe4e03daae7f1fbb}{%
+           family={Inc.},
+           family_i={I\bibinitperiod},
+           given={Statista},
+           given_i={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{55f4199983a1174dfe4e03daae7f1fbb}
+      \strng{fullhash}{55f4199983a1174dfe4e03daae7f1fbb}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Smartphone share of visits to websites in the United States in 2014 and 2015, by industry}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://www.statista.com/statistics/412971/us-mobile-website-industry-visits-share/
+      \endverb
+    \endentry
+    \entry{rn:hotreload}{online}{}
       \field{sortinit}{I}
       \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
       \field{labeltitlesource}{title}
@@ -52,7 +216,7 @@
       \verb https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html
       \endverb
     \endentry
-    \entry{rn:jsenviroment}{misc}{}
+    \entry{rn:jsenviroment}{online}{}
       \field{sortinit}{J}
       \field{sortinithash}{ec3950a647c092421b9fcca6d819504a}
       \field{labeltitlesource}{title}
@@ -65,7 +229,7 @@
       \verb https://facebook.github.io/react-native/docs/javascript-environment.html
       \endverb
     \endentry
-    \entry{rn:nativemodules}{misc}{}
+    \entry{rn:nativemodules}{online}{}
       \field{sortinit}{N}
       \field{sortinithash}{925374ca63e7594de7fafdb83e64d41d}
       \field{labeltitlesource}{title}
@@ -78,18 +242,20 @@
       \verb https://facebook.github.io/react-native/docs/native-modules-ios.html
       \endverb
     \endentry
-    \entry{xamarin:sharing_code}{misc}{}
+    \entry{xamarin:sharing_code}{online}{}
       \field{sortinit}{S}
       \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
       \field{labeltitlesource}{title}
-      \field{note}{2016-04-13}
       \field{title}{Sharing Code Options in Xamarin}
+      \field{urlday}{13}
+      \field{urlmonth}{04}
+      \field{urlyear}{2016}
       \field{year}{2016}
       \verb{url}
       \verb https://docs.xamarin.com/guides/cross-platform/application_fundamentals/building_cross_platform_applications/sharing_code_options/
       \endverb
     \endentry
-    \entry{mobx:intro}{misc}{}
+    \entry{mobx:intro}{online}{}
       \name{author}{1}{}{%
         {{hash=fa5f251ea4e5bf71d0eb13bcc94c6856}{%
            family={Weststrate},
@@ -109,10 +275,46 @@
       \verb http://mobxjs.github.io/mobx/
       \endverb
     \endentry
+    \entry{xamarin:forms}{online}{}
+      \field{sortinit}{X}
+      \field{sortinithash}{2999ebab86052e6d71b434385f8b4ed2}
+      \field{labeltitlesource}{title}
+      \field{title}{Xamarin Forms}
+      \field{urlday}{13}
+      \field{urlmonth}{04}
+      \field{urlyear}{2016}
+      \field{year}{2016}
+      \verb{url}
+      \verb https://www.xamarin.com/forms/
+      \endverb
+    \endentry
+    \entry{xamarin:codereuse}{online}{}
+      \field{sortinit}{X}
+      \field{sortinithash}{2999ebab86052e6d71b434385f8b4ed2}
+      \field{labeltitlesource}{title}
+      \field{title}{Xamarin Platform}
+      \field{urlday}{13}
+      \field{urlmonth}{04}
+      \field{urlyear}{2016}
+      \field{year}{2016}
+      \verb{url}
+      \verb https://www.xamarin.com/platform
+      \endverb
+    \endentry
+    \entry{xamarin:homepage}{online}{}
+      \field{sortinit}{X}
+      \field{sortinithash}{2999ebab86052e6d71b434385f8b4ed2}
+      \field{labeltitlesource}{title}
+      \field{title}{Xamarin.com}
+      \field{urlday}{02}
+      \field{urlmonth}{06}
+      \field{urlyear}{2016}
+      \field{year}{2016}
+      \verb{url}
+      \verb https://www.xamarin.com
+      \endverb
+    \endentry
   \endsortlist
-  \missing{r}
-  \missing{.}
-  \missing{b}
 \endrefsection
 \endinput
 

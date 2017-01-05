@@ -26,11 +26,11 @@
 %	supervisor-specialist = {John Doe},
 	fieldofstudy-english = {Software Engineering},
 %	subfieldofstudy-english = {Mathematical Modelling},
-	fieldofstudy-czech = {Software inženýrství},
+	fieldofstudy-czech = {Softwarové inženýrství},
 %	subfieldofstudy-czech = {Matematické modelování},
-	keywords-czech = {mobile application development, React Native, Andorid, iOS, Memsource Cloud},
+	keywords-czech = {mobile application development, React Native, Android, iOS, Memsource Cloud},
 	keywords-english = {mobile application development, React Native, Android, iOS, Memsource Cloud},
-	day = 8,
+	day = 9,
 	month = 1,
 	year = 2017,
 	specification-file = {ctutest-zadani.pdf},
@@ -58,6 +58,8 @@
 		\ctutemplate{twocolumn.listoffigures}
 	\end{twocolumnfrontmatterpage}
 }
+
+
 
 % Theorem declarations, this is the reasonable default, anybody can do what they wish.
 % If you prefer theorems in italics rather than slanted, use \theoremstyle{plainit}
@@ -120,6 +122,7 @@ V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 \usepackage{enumitem}
 \usepackage{float}
 
+\usepackage[backend=biber]{biblatex}
 % http://tex.stackexchange.com/questions/6423/latex-equivalent-of-pre
 \usepackage{alltt}
 
@@ -204,8 +207,13 @@ V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 %\DeclareCaptionFormat{listing}{{\parbox{\textwidth}{\hspace{10pt}#1#2#3}}}
 \DeclareCaptionFormat{listing}{\colorbox[cmyk]{.3, .13, 0, 0 }{\parbox{\dimexpr\textwidth-2\fboxsep\relax}{#1\hspace{10pt}#2#3}}}
 
+
+
+
 \captionsetup[lstlisting]{format=listing, singlelinecheck=true, margin=0pt, font={bf,footnotesize}}
 %% end of for code listings
+
+\addbibresource{ctutest.bib}
 \begin{document}
 
 \maketitle
@@ -235,9 +243,11 @@ V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 \appendix
 
 
+%\bibliographystyle{plain}
+%\bibliography{ctutest}
 
-\bibliographystyle{amsalpha}
-\bibliography{ctutest}
+\printbibliography
+%\PrintBibliography
 
 \ctutemplate{specification.as.chapter}
 

@@ -1,28 +1,118 @@
-\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
-\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
-% \MRhref is called by the amsart/book/proc definition of \MR.
-\providecommand{\MRhref}[2]{%
-  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
-}
-\providecommand{\href}[2]{#2}
-\begin{thebibliography}{Wes16}
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
 
-\bibitem[Byr15]{redux:intro}
-Lee Byron, \emph{React conf 2015 - immutable data and react}, 2015.
 
-\bibitem[rn:16a]{rn:hotreload}
-\emph{Introducing hot reloading}, 2016.
+\refsection{0}
+  \sortlist[entry]{nty/global}
+    \entry{redux:intro}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=a59a3b77b97608e929ef151836f90dd5}{%
+           family={Byron},
+           family_i={B\bibinitperiod},
+           given={Lee},
+           given_i={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{a59a3b77b97608e929ef151836f90dd5}
+      \strng{fullhash}{a59a3b77b97608e929ef151836f90dd5}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{React Conf 2015 - Immutable Data and React}
+      \field{year}{2015}
+      \verb{url}
+      \verb https://www.youtube.com/watch?v=I7IdS-PbEgI
+      \endverb
+    \endentry
+    \entry{rn:hotreload}{misc}{}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labeltitlesource}{title}
+      \field{title}{Introducing Hot Reloading}
+      \field{urlday}{24}
+      \field{urlmonth}{03}
+      \field{urlyear}{2016}
+      \field{year}{2016}
+      \verb{url}
+      \verb https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html
+      \endverb
+    \endentry
+    \entry{rn:jsenviroment}{misc}{}
+      \field{sortinit}{J}
+      \field{sortinithash}{ec3950a647c092421b9fcca6d819504a}
+      \field{labeltitlesource}{title}
+      \field{title}{JavaScript Environment}
+      \field{urlday}{13}
+      \field{urlmonth}{10}
+      \field{urlyear}{2016}
+      \field{year}{2016}
+      \verb{url}
+      \verb https://facebook.github.io/react-native/docs/javascript-environment.html
+      \endverb
+    \endentry
+    \entry{rn:nativemodules}{misc}{}
+      \field{sortinit}{N}
+      \field{sortinithash}{925374ca63e7594de7fafdb83e64d41d}
+      \field{labeltitlesource}{title}
+      \field{title}{Native Modules}
+      \field{urlday}{03}
+      \field{urlmonth}{11}
+      \field{urlyear}{2016}
+      \field{year}{2016}
+      \verb{url}
+      \verb https://facebook.github.io/react-native/docs/native-modules-ios.html
+      \endverb
+    \endentry
+    \entry{xamarin:sharing_code}{misc}{}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labeltitlesource}{title}
+      \field{note}{2016-04-13}
+      \field{title}{Sharing Code Options in Xamarin}
+      \field{year}{2016}
+      \verb{url}
+      \verb https://docs.xamarin.com/guides/cross-platform/application_fundamentals/building_cross_platform_applications/sharing_code_options/
+      \endverb
+    \endentry
+    \entry{mobx:intro}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=fa5f251ea4e5bf71d0eb13bcc94c6856}{%
+           family={Weststrate},
+           family_i={W\bibinitperiod},
+           given={Michel},
+           given_i={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{fa5f251ea4e5bf71d0eb13bcc94c6856}
+      \strng{fullhash}{fa5f251ea4e5bf71d0eb13bcc94c6856}
+      \field{sortinit}{W}
+      \field{sortinithash}{99e3ba1b3f78bb6f073e7fa7ac11636b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{MobX - Simple, scalable state management}
+      \field{year}{2016}
+      \verb{url}
+      \verb http://mobxjs.github.io/mobx/
+      \endverb
+    \endentry
+  \endsortlist
+  \missing{r}
+  \missing{.}
+  \missing{b}
+\endrefsection
+\endinput
 
-\bibitem[rn:16b]{rn:jsenviroment}
-\emph{Javascript environment}, 2016.
-
-\bibitem[rn:16c]{rn:nativemodules}
-\emph{Native modules}, 2016.
-
-\bibitem[Wes16]{mobx:intro}
-Michel Weststrate, \emph{Mobx - simple, scalable state management}, 2016.
-
-\bibitem[xam16]{xamarin:sharing_code}
-\emph{Sharing code options in xamarin}, 2016.
-
-\end{thebibliography}

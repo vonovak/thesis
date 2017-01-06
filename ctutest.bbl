@@ -42,6 +42,75 @@
       \verb http://redux.js.org/docs/introduction/ThreePrinciples.html
       \endverb
     \endentry
+    \entry{ios:terminationOfPendingTasks}{online}{}
+      \name{author}{1}{}{%
+        {{hash=8bf416edc5548ec9bce97c1da77d1939}{%
+           family={Apple},
+           family_i={A\bibinitperiod},
+           given={Inc.},
+           given_i={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{8bf416edc5548ec9bce97c1da77d1939}
+      \strng{fullhash}{8bf416edc5548ec9bce97c1da77d1939}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{App Programming Guide for iOS - Background Execution}
+      \field{urlday}{06}
+      \field{urlmonth}{01}
+      \field{urlyear}{2017}
+      \field{year}{2016}
+      \verb{url}
+      \verb https://developer.apple.com/library/content/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html#//apple_ref/doc/uid/TP40007072-CH4-SW5
+      \endverb
+    \endentry
+    \entry{ios:filePicker}{online}{}
+      \name{author}{1}{}{%
+        {{hash=8bf416edc5548ec9bce97c1da77d1939}{%
+           family={Apple},
+           family_i={A\bibinitperiod},
+           given={Inc.},
+           given_i={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{8bf416edc5548ec9bce97c1da77d1939}
+      \strng{fullhash}{8bf416edc5548ec9bce97c1da77d1939}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Document Picker Programming Guide - Accessing Documents}
+      \field{urlday}{06}
+      \field{urlmonth}{11}
+      \field{urlyear}{2016}
+      \field{year}{2016}
+      \verb{url}
+      \verb https://developer.apple.com/library/content/documentation/FileManagement/Conceptual/DocumentPickerProgrammingGuide/AccessingDocuments/AccessingDocuments.html
+      \endverb
+    \endentry
+    \entry{ios:bgConsiderations}{online}{}
+      \name{author}{1}{}{%
+        {{hash=8bf416edc5548ec9bce97c1da77d1939}{%
+           family={Apple},
+           family_i={A\bibinitperiod},
+           given={Inc.},
+           given_i={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{8bf416edc5548ec9bce97c1da77d1939}
+      \strng{fullhash}{8bf416edc5548ec9bce97c1da77d1939}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{URL Session Programming Guide - Using NSURLSession}
+      \field{urlday}{06}
+      \field{urlmonth}{11}
+      \field{urlyear}{2016}
+      \field{year}{2016}
+      \verb{url}
+      \verb https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/URLLoadingSystem/Articles/UsingNSURLSession.html#//apple_ref/doc/uid/TP40013509-SW44
+      \endverb
+    \endentry
     \entry{rn:bridge}{online}{}
       \field{sortinit}{B}
       \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
@@ -298,6 +367,29 @@
       \verb https://facebook.github.io/react-native/docs/javascript-environment.html
       \endverb
     \endentry
+    \entry{rfc2388}{online}{}
+      \name{author}{1}{}{%
+        {{hash=2c65c9463cf643e809bb9e197caa2e75}{%
+           family={Masinter},
+           family_i={M\bibinitperiod},
+           given={L.},
+           given_i={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{2c65c9463cf643e809bb9e197caa2e75}
+      \strng{fullhash}{2c65c9463cf643e809bb9e197caa2e75}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Returning Values from Forms: multipart/form-data}
+      \field{urlday}{06}
+      \field{urlmonth}{11}
+      \field{urlyear}{2016}
+      \field{year}{1998}
+      \verb{url}
+      \verb http://www.ietf.org/rfc/rfc2388.txt
+      \endverb
+    \endentry
     \entry{rn:nativemodules}{online}{}
       \field{sortinit}{N}
       \field{sortinithash}{925374ca63e7594de7fafdb83e64d41d}
@@ -309,6 +401,29 @@
       \field{year}{2016}
       \verb{url}
       \verb https://facebook.github.io/react-native/docs/native-modules-ios.html
+      \endverb
+    \endentry
+    \entry{rn:navigation}{online}{}
+      \name{author}{1}{}{%
+        {{hash=bacbe5bb5b4aa1e92d3c6fde3c289067}{%
+           family={Radio},
+           family_i={R\bibinitperiod},
+           given={React\bibnamedelima Native},
+           given_i={R\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \strng{namehash}{bacbe5bb5b4aa1e92d3c6fde3c289067}
+      \strng{fullhash}{bacbe5bb5b4aa1e92d3c6fde3c289067}
+      \field{sortinit}{R}
+      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{episode 40 Navigation in React Native with Eric Vicenti of Facebook}
+      \field{urlday}{05}
+      \field{urlmonth}{01}
+      \field{urlyear}{2017}
+      \field{year}{2016}
+      \verb{url}
+      \verb https://devchat.tv/react-native-radio/40-navigation-in-react-native-with-eric-vicenti
       \endverb
     \endentry
     \entry{xamarin:sharing_code}{online}{}

@@ -1,16 +1,16 @@
 \chapter{Testing and Crash Reporting}
 
-The Android and iOS versions of the application were implemented in parallel, mostly by development on my personal machine running Ubuntu and deployed to my Nexus 5 phone with Android 6.0.1, following a verification and fine-tuning for iOS. The development phone for iOS was iPhone 5C running the latest version of iOS which was available at the time. 
+The Android and iOS versions of the application were implemented in parallel, mostly on my personal machine with Ubuntu 16.04 and my Nexus 5 phone with Android 6.0.1, following a verification and fine-tuning for iOS. The development phone for iOS was iPhone 5C running the latest version of iOS which was available at the time. 
 
-I have also extensively used the iPhone and Android emulators for development and to see how the application would look with different screen resolutions and OS versions (the latter is especially relevant for Android). However, access to real devices is crucial, since only a real device can give a feeling of how well touchable elements respond to touches, how the software keyboard influences the displayed content and how the application functions in terms of performance. A real iPhone device was also needed for implementing the native module for creating jobs, since the background capabilities of NSURLSession of an iPhone emulator do not fully correspond to the behavior of a real device.
+I have also used the iPhone and Android emulators for development and to see how the application looks with different screen resolutions and OS versions (the latter is especially relevant for Android). However, having access to real devices was crucial, since only a real device can give a feeling of how well touchable elements respond to touches, how the software keyboard influences the displayed content and how the application functions in terms of performance. A real iPhone device was also needed for implementing the native module for creating jobs, since the background capabilities of NSURLSession of an iPhone emulator do not fully correspond to the behavior of a real device.
 
 All throughout the development, the application was receiving its data from Memsource servers, ie. I have not used any server implementation specifically for the development.
 
 
 \section{Unit Testing}
-The lowest level upon which the application is tested is unit testing. I have chosen Jest for implementing the unit tests. Jest, like several other tools I have used, is a library actively developed by Facebook and is open source. 
+The lowest level upon which the application is tested is unit testing. I have chosen Jest \footnote{http://facebook.github.io/jest/} for implementing the unit tests. Jest, like several other tools I have used, is a library actively developed by Facebook and is open source. 
 
-It offers essential functionality similar to other popular Javascript test runners such as AVA or Mocha, such as making assertions upon the results of tested code, creating mocks and also offers snapshot testing, which is a React-specific feature for testing the structure of React components without directly rendering them. Snapshot testing is a very useful feature especially in React Native as it allows to test component appearance without the need for rendering the UI on a device or emulator. 
+It offers essential functionality similar to other popular Javascript test runners (e.g. AVA or Mocha), such as making assertions upon the results of tested code, creating mocks and also offers snapshot testing, which is a React-specific feature for testing the structure of React components without directly rendering them. Snapshot testing is a very useful feature especially in React Native as it allows to test component appearance without the need for rendering the UI on a device or emulator. 
 
 Jest creates a snapshot that captures the necessary information for component rendering. When the component changes, the snapshot changes as well, and we're notified of this fact during testing and also by version control when the change is being merged since the snapshot files live alongside the code. 
 

@@ -19,6 +19,29 @@
 
 \refsection{0}
   \sortlist[entry]{nty/global}
+    \entry{redux:store}{online}{}
+      \name{author}{1}{}{%
+        {{hash=96ed906d3a763ce2d916fe6037aebffe}{%
+           family={Abramov},
+           family_i={A\bibinitperiod},
+           given={Dan},
+           given_i={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{96ed906d3a763ce2d916fe6037aebffe}
+      \strng{fullhash}{96ed906d3a763ce2d916fe6037aebffe}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Three Principles}
+      \field{urlday}{04}
+      \field{urlmonth}{01}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \verb{url}
+      \verb http://redux.js.org/docs/introduction/ThreePrinciples.html
+      \endverb
+    \endentry
     \entry{rn:bridge}{online}{}
       \field{sortinit}{B}
       \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
@@ -50,6 +73,29 @@
       \field{year}{2015}
       \verb{url}
       \verb https://www.youtube.com/watch?v=I7IdS-PbEgI
+      \endverb
+    \endentry
+    \entry{stateOfJS}{online}{}
+      \name{author}{1}{}{%
+        {{hash=4cb1dc438d4048787f642fded723261c}{%
+           family={Coleman},
+           family_i={C\bibinitperiod},
+           given={Tom},
+           given_i={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{4cb1dc438d4048787f642fded723261c}
+      \strng{fullhash}{4cb1dc438d4048787f642fded723261c}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The State of JavaScript 2016 - State Management}
+      \field{urlday}{04}
+      \field{urlmonth}{01}
+      \field{urlyear}{2017}
+      \field{year}{2016}
+      \verb{url}
+      \verb http://stateofjs.com/2016/statemanagement/
       \endverb
     \endentry
     \entry{googleAdwords}{online}{}
@@ -201,6 +247,29 @@
       \field{year}{2015}
       \verb{url}
       \verb http://www.statista.com/statistics/412971/us-mobile-website-industry-visits-share/
+      \endverb
+    \endentry
+    \entry{ecma:map}{online}{}
+      \name{author}{1}{}{%
+        {{hash=e83578898872635ef15c7690819d9c96}{%
+           family={International},
+           family_i={I\bibinitperiod},
+           given={Ecma},
+           given_i={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{e83578898872635ef15c7690819d9c96}
+      \strng{fullhash}{e83578898872635ef15c7690819d9c96}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Map Objects}
+      \field{urlday}{05}
+      \field{urlmonth}{01}
+      \field{urlyear}{2017}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://www.ecma-international.org/ecma-262/6.0/#sec-map-objects
       \endverb
     \endentry
     \entry{rn:hotreload}{online}{}

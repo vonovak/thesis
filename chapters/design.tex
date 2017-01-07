@@ -104,7 +104,7 @@ For the second iteration of testing, I used an improved prototype which fixed th
 In this section I describe the process of designing the inner workings of the application with respect to the fact that React Native was chosen as the library for implementing the application. This first involves finding a solution for app's state management which may fundamentally influence the architecture.
 
 
-React Native allows to create user interfaces from the fundamental building blocks of the platform it runs on (\texttt{View} on Android and \texttt{UIView} on iOS) and it also provides means for communicating between the Javascript and native layers. What remains to be chosen is a library that will be used for storing the application state - ie. all of the data fetched from the Memsource API and displayed in the app such as project data, app user information and other. There are several libraries that help solve the problem. The most popular at the time of writing is called Redux \cite{stateOfJS}.
+React Native allows to create user interfaces from the fundamental building blocks of the platform it runs on (\texttt{View} on Android and \texttt{UIView} on iOS) and it also provides means for communicating between the JavaScript and native layers. What remains to be chosen is a library that will be used for storing the application state - ie. all of the data fetched from the Memsource API and displayed in the app such as project data, app user information and other. There are several libraries that help solve the problem. The most popular at the time of writing is called Redux \cite{stateOfJS}.
 
 \subsection{Redux}
 
@@ -139,7 +139,7 @@ After developing a small part of the application with Redux and also MobX, I cho
 Using Redux requires writing boilerplate code to describe the actions and writing the reducers. Also, it is not always possible to dispatch actions that are plain objects - communication with Memsource API, for example, would require dispatching functions that would change the state after receiving data from the API. Working with hierarchies of objects also requires normalizing the application state, similar to how it is done in databases, with ids used as keys for retrieving a referenced object from other parts of the state tree. Apart from Redux itself, this then involves understanding several other libraries such as normalizr, redux-thunk (or other), reselect (optional) and Immutable.js (optional but much recommended).
 
 
-With MobX, the app will consist of the views which are handled by React, domain objects, which are Javascript objects and some of their properties will be marked as observable or computed (ie. derived from other observables). The domain objects will be stored in domain stores. Stores are objects that instantiate new domain objects, delete the existing ones and provide other necessary functions with regard to domain objects. The last piece of the puzzle is handling communication with the Memsource API.
+With MobX, the app will consist of the views which are handled by React, domain objects, which are JavaScript objects and some of their properties will be marked as observable or computed (ie. derived from other observables). The domain objects will be stored in domain stores. Stores are objects that instantiate new domain objects, delete the existing ones and provide other necessary functions with regard to domain objects. The last piece of the puzzle is handling communication with the Memsource API.
 
 \section{Client-server Communication}
 

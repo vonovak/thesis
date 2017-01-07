@@ -81,7 +81,7 @@ User interfaces made with React consist of components, which are independent and
 
 The main way of modifying component behavior is composition - by wrapping a component and adding some functionality, we create a new one. Since the app needs to support lots of CRUD operations we need components for choosing date, choosing one or more items from a small as well as large lists and more. One of the first issues I have encountered is that finding form components which would look according to what is customary on both platforms is hard. While there are UI toolkits for React Native such as Shoutem UI Toolkit or NativeBase and community-developed components, none of them offered quite the functionality that I needed at the time when I evaluated them.
 
-I therefore created wrappers around the basic form components provided by React Native and gave them default styling which is overridable (for example a label or an icon can be added) and mode (for example modal or inline pickers on iOS). All of these options are available under a unified interface of the component, which allows it to be easily used throughout the app. The figure shows an example of different look of ListPicker and DatePicker components on Android and iOS. Note that the pickers on iOS can be displayed both inline and in a modal at the bottom of the screen. Android ListPicker on the other hand, can be displayed in a dialog or as a dropdown.
+I therefore created wrappers around the basic form components provided by React Native and gave them default styling which is overridable (for example a label or an icon can be added) and mode (for example modal or inline pickers on iOS). All of these options are available under a unified interface of the component, which allows it to be easily used throughout the app. The figure \ref{components} shows an example of different look of ListPicker and DatePicker components on Android and iOS. Note that the pickers on iOS can be displayed both inline and in a modal at the bottom of the screen. Android ListPicker on the other hand, can be displayed in a dialog or as a dropdown.
 
 \begin{figure}[H]
 	\includegraphics[width=1\textwidth]{pics/components}
@@ -89,9 +89,32 @@ I therefore created wrappers around the basic form components provided by React 
 	\label{components}
 \end{figure}
 
+\begin{figure}[]
+	\includegraphics[width=0.9\textwidth]{pics/screenshots/projs}
+	\caption{Platform-customized behavior of selecting jobs and providing actions over the selection.}
+	\label{jobList}
+\end{figure}
+
+
+\begin{figure}[]
+	\includegraphics[width=0.9\textwidth]{pics/screenshots/projs}
+	\caption{Search screen along with displayed search history entry.}
+	\label{search}
+\end{figure}
+
+\begin{figure}[]
+	\includegraphics[width=0.9\textwidth]{pics/screenshots/projs}
+	\caption{Project info screen.}
+	\label{projInfo}
+\end{figure}
+% convert IMG_0004.PNG Screenshot_20170107-000221.png +append -background white -splice 40x0+640+0 projs.png
+
 
 When using such components in code, one only has to provide them with the information about the icon, the values they need to show, the mode and how they should respond to user action. The logic of how the component should be displayed and styled is hidden inside of it, with the styling being overridable. This way we can construct reusable components with platform-specific behavior. This, in my opinion is a very powerful concept, since as the community evolves it will create components that serve the same purpose and have the same interface, but may look even completely different per platform. The code responsible for the different behavior, however, will be hidden inside those libraries and we will just plug the components into our projects. This will allow to focus more on the business logic of the app while enabling to develop it so that looks as is customary for the platform it runs on.
 
+The job list screen shown in figure \ref{jobList} is a good example of where Android and iOS usage patterns deviate and how I captured this difference in code to provide different user experience for each platform. The figure displays the job list screen in selection mode. To get into this mode on Android user would have to tap a file icon on the left, or long-press an item. On iOS, the selection mode is enabled by tapping "Edit" button in the right of the navbar. To get out of the mode on Android, user can tap the arrow in the navbar or press the back button (the second tap / back button press navigates to the previous screen). On iOS this is done by tapping the "Done" button. User can perform different actions over the selection, such as editing the jobs, or downloading the completed file (Android) or previewing it (iOS). On Android these actions are shown in the navbar while on iOS they are available from the bar at the bottom of the screen. I have implemented a solution which works according to what is customary on both platforms using just React --- the downside to this approach is that it involves writing more code to customize the behavior.
+
+Figures \ref{search} and \ref{projInfo} show other selected screenshots with only small platform-specific differences.
 
 %As described in the todo section, React native offers several ways of how to handle per-platform customizations. We will use these to provide user with the app handling they are accustomed to. Examples of places that need custom handling are actions that are included in the navbar on Android while they're shown in the bottom toolbar on iOS. Also the navigation has to look differently. 
 
@@ -99,7 +122,7 @@ When using such components in code, one only has to provide them with the inform
 
 As explained in section \ref{sec:stores}, the information about projects, jobs, and other entities in stored in domain objects, which in turn are kept in stores. It is important that there is always only one instance of a particular domain object in memory, and only one instance of a store.
 
-As an example of how a store is implemented, let's consider the project store whose class diagram is in figure \ref{projectStore} on page \pageref{projectStore}. In its constructor it accepts (among other) the user store - that way we can reactively clean and refresh the project list in case the active user changes. This is done through the aforementioned autorun function from MobX. It also receives ApiCaller instance which is used for communication with Memsource API. Projects are stored in a Map data structure, which is typically backed by a hash table that offers constant access time, or by other mechanism that provides sublinear access time \cite{ecma:map}. The keys of the Map are projects ids and the values are instances of Project class. That way we can access the stored project instances quickly, which is especially convenient because the projects are displayed in multiple tabs that correspond to filters in Memsource Cloud (all, in progress, overdue, my). One project may be displayed in any number of tabs and even when a project is displayed in all four of them, internally this refers to the same project instance. Also, when the app receives a JSON (JavaScript Object Notation) containing projects, it can quickly see whether or not a project is already stored.
+As an example of how a store is implemented, let's consider the project store whose class diagram is in figure \ref{projectStore} on page \pageref{projectStore}. In its constructor it accepts (among other) the user store - that way we can reactively clean and refresh the project list in case the active user changes. This is done through the aforementioned autorun function from MobX. It also receives ApiCaller instance which is used for communication with Memsource API. Projects are stored in a Map data structure, which is typically backed by a hash table that offers constant access time, or by other mechanism that provides sublinear access time \cite{ecma:map}. The keys of the Map are projects ids and the values are instances of Project class. That way we can access the stored project instances quickly, which is especially convenient because the projects are displayed in multiple tabs that correspond to filters in Memsource Cloud (all, in progress, overdue, my). One project may be displayed in any number of tabs and even when a project is displayed in all four of them, internally this refers to the same project instance. Also, when the app receives a JSON \index{JSON} (JavaScript Object Notation - lightweight, human-readable data-interchange format) containing projects, it can quickly see whether or not a project is already stored.
 
 
 \subsection{Connecting Stores with Views}
@@ -231,7 +254,7 @@ Due to JavaScript's dynamic nature and the absence of any transformation that wo
 
 \subsection{Flow - Static Type Checker}
 
-Flow \index{Flowtype} \footnote{https://flowtype.org/} is a static type checker for JavaScript developed by Facebook. It works by using type inference on JavaScript code even without any additional information provided by the developer. It tracks the type of variables as they are used throughout a program and allows to catch bugs before it is executed, without changing the existing code. 
+Flow \footnote{https://flowtype.org/} \index{Flowtype}  is a static type checker for JavaScript developed by Facebook. It works by using type inference on JavaScript code even without any additional information provided by the developer. It tracks the type of variables as they are used throughout a program and allows to catch bugs before it is executed, without changing the existing code. 
 
 Flow attempts to infer the types whenever possible, but JavaScript code can be very dynamic and hard to analyze statically. Flow therefore offers ways to specify types explicitly.
 
@@ -246,7 +269,7 @@ I have used Flow extensively throughout the project and annotated the code regul
 
 \subsection{ESLint}
 
-ESLint \index{ESLint} \footnote{http://eslint.org/} is a linter -- a tool that flags potential problems in source code. ESLint takes the form of a set of rules that the developer specifies and ESLint warns her when the code violates a particular rule. Rules may describe a potential bug in source code (such as calling a function that is not defined) or a desired coding style (such as using semicolons at the end of a line).
+ESLint  \footnote{http://eslint.org/} \index{ESLint} is a linter -- a tool that flags potential problems in source code. ESLint takes the form of a set of rules that the developer specifies and ESLint warns her when the code violates a particular rule. Rules may describe a potential bug in source code (such as calling a function that is not defined) or a desired coding style (such as using semicolons at the end of a line).
 
 ESLint itself does not force any rules onto the developer. Instead, different rule sets can be obtained online and plugged into the project. Choosing such rule set is often a matter of personal preference or the technology that the project uses. For example, there are React Native-specific rules that eg. warn about having unused style definitions in the component code. 
 
@@ -269,7 +292,7 @@ Some would say that not using the native navigation breaks the promise of React 
 Over the course of time new issues with using Navigator emerged and there was a need to come up with a better way of managing the navigation state. Among other issues, the original Navigator becomes hard to work with in case we use several instances of it. For example, the application I have developed uses three different navigation components. One StackNavigation is used as the root navigator. The root navigator contains another StackNavigation where the vast majority of the app's content is pushed. In some places, however, I wanted to display modal windows. The modals are pushed onto the master navigator so that they are displayed in the foreground. The modal window contains another StackNavigation of its own, which yields a total of three navigators, but for applications that use a tab-based navigation or drawer navigation, that number is likely to be higher. 
 
 
-At the time when I started working on the project, the new solution to navigation was already present in the React Native core and was named NavigationExperimental. However, since NavigationExperimental is only a set of low-level components, people started writing libraries around them to provide a more feature-rich experience for the developers. In the end, I have settled with a library called ex-navigation. It offers some needed functionality out of the box and allows to customize the behavior for iOS and Android such as handling the navigation bar, animations and back gesture on iOS as well as the back button handling on Android. Most importantly it works well with several navigators which can be managed independently and offers better animation performance. Since navigation is one of the longer-term major problems present in React Native, the React Native team also addressed the issue and a new navigation solution is scheduled for beta release in January 2017. This solution is based on ex-navigation so I should not have problems migrating to it once it becomes stable.
+At the time when I started working on the project, the new solution to navigation was already present in the React Native core and was named NavigationExperimental. However, since NavigationExperimental is only a set of low-level components, people started writing libraries around them to provide a more feature-rich experience for the developers. In the end, I have settled with a library called ex-navigation. It offers some needed functionality out of the box and allows to customize the behavior for iOS and Android such as handling the navigation bar, animations and back gesture on iOS as well as the back button handling on Android. Most importantly it works well with several navigators which can be managed independently and offers better animation performance. Since navigation is one of the longer-term major problems present in React Native, the React Native team also addressed the issue and a new navigation solution is scheduled for beta release in January 2017 \cite{exnav}. A migration path from ex-navigation will be provided so there should not be problems migrating to it once it becomes stable.
 
 \section{Issues}
 
@@ -287,7 +310,7 @@ Other difficulties were met in working with files (uploading and downloading job
 
 \section{Open Source Software Contributions}
 
-Throughout the development of the application, I have contributed to different projects by bug fixes or code and documentation improvements. The projects include: 
+Throughout the development of the application, I have contributed to different projects by bug fixes or code and documentation improvements. The projects, all open source and hosted on GitHub, include: 
 
 
 \begin{itemize}
@@ -303,3 +326,6 @@ Throughout the development of the application, I have contributed to different p
 \item react-native-radio-button-android
 \item react-native-android-checkbox
 \end{itemize}
+
+
+%There is a severe bug in the Android version of the app caused by a bug in React Native core. Rather than waiting for the bug to be fixed in React Native, I have decided for a workaround (to replace the Android navigation bar component) which will also have the pleasant side effect of improving navigation bar code structure in the application. The downside is that the app will not be using the native navigation bar provided by Android.

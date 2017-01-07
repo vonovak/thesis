@@ -186,8 +186,7 @@ For this purpose, the User and UserStore classes are used. User instance contain
 UserStore will contain an array of all users who are currently logged into the app, and a reference to the user which is currently active. Furthermore it will contain methods for creating new user instances and persisting the user information so that it is available upon application startup.
 
 
-\subsection{Representing Jobs}
-
+%\subsection{Representing Jobs}
 
 
 
@@ -197,7 +196,7 @@ React Native does not aim to provide developers with a way to run the same code 
 
 
 Due to the nature of how both platforms are interacted with, we need to have an ability to make the user experience different per platform. As an example, take the Datepicker on Android versus the iOS Datepicker, or the Android navigation bar which often offers several actions (some with icons) versus iOS navigation bar which usually contains the title and no more than 2 actions. 
-Actions that, on Android, would be included in the navbar, are often presented in a toolbar on the bottom of the screen on iOS, or hidden in an action sheet. Also note how Android works with long presses for item selection (for example in the Gmail app or the Downloads app), while this is usually done by an edit button in iOS navbar. The edit button then switches to an edit mode where user can perform their edits. If we want to follow these customs, this requires us to write separate code that would make the UI look and react to user actions differently on each platform, as well as custom code for the item selections and Android back button handling --- when in edit mode, the first back button tap disables the edit mode and only the second tap navigates to the previous screen.
+Actions that, on Android, would be included in the navbar, are often presented in a toolbar on the bottom of the screen on iOS, or hidden in an action sheet. Also note how Android works with presses for item selection (for example in the Gmail app or the Downloads app), while this is usually done by an edit button in iOS navbar. The edit button then switches to an edit mode where user can perform their edits. If we want to follow these customs, this requires us to write separate code that would make the UI look and react to user actions differently on each platform, as well as custom code for the item selections and Android back button handling.
 
 
 React Native offers two ways how to go about platform-specific behavior. First is through the Platform module which gives information about the platform and its version. Another method is to use different file extensions (ie. \texttt{android.js} or \texttt{ios.js}) for components. The appropriate file will then be packed for the JavaScript bundle of each platform. Specifying what component to render by using different file extension is a powerful concept: typically a developer would use this approach for components that will serve the same purpose but need to look differently on each platform. Both files then have the same interface which abstracts away the inner differences. Such approach can be used in a number of components such as buttons, pickers or even a non-component code. I will take advantage of these features to improve user experience and to follow the design guidelines.

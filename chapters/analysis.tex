@@ -80,7 +80,7 @@ Follows a detailed description of requirements:
 	\begin{enumerate}[label*=\arabic*.]
 		\item The app will load all its content through a public HTTP API which is provided by Memsource. In cases where a new API is needed, it will be developed.
 		\item The app has to keep the number of API requests as low as possible so that the phone's and the servers' resources are not overused.
-		\item The first screen should render within 5 seconds after starting the app.
+		\item The first screen should render within 4 seconds after starting the app.
 	\end{enumerate}
 	
 	It follows that we assume the user will have internet connection available on their device at all times when the app is used to create new content and fetch the up-to-date data. 
@@ -111,13 +111,12 @@ Follows a detailed description of requirements:
 				\item PM has to be able to create (upload) new translation jobs from document providers available on the platform.
 				\item Adding jobs to project from an email attachment also has to be supported.
 				\item When adding a new job, user will be able to enter the target languages, select due date, enter linguists for the job and have the option to notify them of the new job.
-				\item After a job is uploaded, user has to be informed about it. Similarly, user has to be informed about unsuccessful file uploads and requests.
-				\item App should only support creating jobs from the most common file types (MS Word, Excel, Powerpoint and HTML) and cover their file import options to the same extent as Memsource Cloud.
-				\item User needs to have the ability to select individual job, as well as several jobs, to download, edit and delete them. Editing consists of changing the linguist, status and due date. 
+				\item After a job is uploaded, user has to be informed about it. Similarly, user has to be informed about unsuccessful file uploads.
+				\item App should only support creating jobs from the most common file types (MS Word, Excel, Powerpoint and HTML).
+				\item User needs to have the ability to select individual job, as well as several jobs, to download, edit and delete them. Editing consists of changing the linguist, status and due date.
 				\item Similarly to searching and filtering of projects, the app will allow to filter jobs by name, status, target language, linguist and due date.
-				
 			\end{enumerate}
-			\item The application will not cover support for translating, i.e. Memsource Editor will not be a part of it since we found that it is overly complex to be used on a small screen of a mobile device.
+			%\item The application will not cover support for translating, i.e. Memsource Editor will not be a part of it since we found that it is overly complex to be used on a small screen of a mobile device.
 			
 		\end{enumerate}
 		Note: The advanced project creation options for machine translation, analysis and other which are visible in Memsource Cloud, will not be included.
@@ -147,10 +146,10 @@ Follows a detailed description of requirements:
 
 \section{Analysis of Platforms and Development Tools}
 
-Today's market of mobile devices is largely divided between two major platforms---iOS and Android. With 80.7\% for Android and 17.7\% for iOS, these two alone made up more than 98\% of worldwide sales in 4Q15, according to Gartner \cite{gartner}. Windows Phone comes third with 1.1\% of sales. Interestingly, in its March 2016 report, Kantar Worldpanel shows the sales of vary greatly among different states \cite{kantar}. For example, while iOS has a sales share of 56\% in Japan, it only has 17.8\% in Germany. As of Q1 2016, Android is growing in Europe, at the expense of iOS and Windows Phone, whose sales have been dropping in the UK and France where Windows Phone was historically relatively successful. The data from 3Q2016 shows growing Android market share: 86.8\%, 12.5\% and 0.3\% for Android, iOS and Windows Phone, respectively according to IDC \cite{idc:marketShare} and a report from Gartner \cite{gartner2} shows very similar numbers.
+Today's market of mobile devices is largely divided between two platforms---iOS and Android. With 80.7\% for Android and 17.7\% for iOS, these two alone made up more than 98\% of worldwide sales in 4Q15, according to Gartner \cite{gartner}. Windows Phone comes third with 1.1\% of sales. Interestingly, in its March 2016 report, Kantar Worldpanel shows the sales of vary greatly among different states \cite{kantar}. For example, while iOS has a sales share of 56\% in Japan, it only has 17.8\% in Germany. As of Q1 2016, Android is growing in Europe, at the expense of iOS and Windows Phone, whose sales have been dropping in the UK and France where Windows Phone was historically relatively successful. The data from 3Q2016 shows growing Android sales: 86.8\%, 12.5\% and 0.3\% for Android, iOS and Windows Phone, respectively according to IDC \cite{idc:marketShare} and a report from Gartner \cite{gartner2} shows very similar numbers.
 
 
-Since we are looking for a multiplatform solution, I continue with describing the state of the art of multiplatform development tools.
+Since we are looking for a solution for creating apps for more than just one platform, I continue with describing the state of the art of multiplatform development tools.
 
 \section{Xamarin}
 
@@ -207,7 +206,7 @@ In case the functionality is not yet implemented, the developer can create a nat
 % pridani do indexu: \emph{affine}\index{affine}
 \section{Ionic}
 
-Currently in version 2, RC 4, Ionic \footnote{http://ionicframework.com} is another successful framework for developing cross-platform mobile apps which was initially released in 2013. Ionic is a hybrid framework, meaning an app created with it runs in a WebView, same as a website would---with the important difference that it can also use the native device APIs. It supports iOS, Android and Windows Phone.
+In version 2.RC4 as of 1/2017, Ionic \footnote{http://ionicframework.com} is another successful framework for developing cross-platform mobile apps which was initially released in 2013. Ionic is a hybrid framework, meaning an app created with it runs in a WebView, same as a website would---with the important difference that it can also use the native device APIs. It supports iOS, Android and Windows Phone.
 
 Just like the aforementioned frameworks, Ionic is open source and offers a set of mobile-optimized components written in HTML, CSS and JavaScript. Ionic 2 is integrates with Angular 2, a framework for web development from Google. Ionic has put o lot of work into providing components that are styled according to each supported platform, thus saving the developer's time by not having to spend valuable time by styling the UI. Compared to React Native and Xamarin, Ionic gives less flexibility in customizing the app for different platform. With Xamarin and RN, developer can make the app look quite different (at the expense of writing more code) while this is limited on Ionic. Depending on the particular app context, this can be both a downside or a benefit.
 

@@ -33,7 +33,7 @@
       \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Three Principles}
+      \field{title}{Redux - Three Principles}
       \field{urlday}{04}
       \field{urlmonth}{01}
       \field{urlyear}{2017}
@@ -111,19 +111,6 @@
       \verb https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/URLLoadingSystem/Articles/UsingNSURLSession.html#//apple_ref/doc/uid/TP40013509-SW44
       \endverb
     \endentry
-    \entry{rn:bridge}{online}{}
-      \field{sortinit}{B}
-      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
-      \field{labeltitlesource}{title}
-      \field{title}{Bridging in React Native}
-      \field{urlday}{03}
-      \field{urlmonth}{01}
-      \field{urlyear}{2017}
-      \field{year}{2015}
-      \verb{url}
-      \verb https://tadeuzagallo.com/blog/react-native-bridge/
-      \endverb
-    \endentry
     \entry{redux:intro}{online}{}
       \name{author}{1}{}{%
         {{hash=a59a3b77b97608e929ef151836f90dd5}{%
@@ -185,6 +172,27 @@
       \field{year}{2015}
       \verb{url}
       \verb http://adwords.blogspot.com/2015/05/building-for-next-moment.html
+      \endverb
+    \endentry
+    \entry{exnav}{online}{}
+      \name{author}{1}{}{%
+        {{hash=84c01db453cc5549400cd11fc4e0b12d}{%
+           family={ExponentJS},
+           family_i={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{84c01db453cc5549400cd11fc4e0b12d}
+      \strng{fullhash}{84c01db453cc5549400cd11fc4e0b12d}
+      \field{sortinit}{E}
+      \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{ExNavigation}
+      \field{urlday}{07}
+      \field{urlmonth}{01}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \verb{url}
+      \verb https://github.com/exponent/ex-navigation#an-important-note-about-the-future
       \endverb
     \endentry
     \entry{comscore}{online}{}
@@ -496,6 +504,29 @@
       \field{year}{2016}
       \verb{url}
       \verb https://www.xamarin.com
+      \endverb
+    \endentry
+    \entry{rn:bridge}{online}{}
+      \name{author}{1}{}{%
+        {{hash=f03d484799f5760b8cd8ddc3768f6405}{%
+           family={Zagallo},
+           family_i={Z\bibinitperiod},
+           given={Tadeu},
+           given_i={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{f03d484799f5760b8cd8ddc3768f6405}
+      \strng{fullhash}{f03d484799f5760b8cd8ddc3768f6405}
+      \field{sortinit}{Z}
+      \field{sortinithash}{fdda4caaa6b5fa63e0c081dcb159543a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Bridging in React Native}
+      \field{urlday}{03}
+      \field{urlmonth}{01}
+      \field{urlyear}{2017}
+      \field{year}{2015}
+      \verb{url}
+      \verb https://tadeuzagallo.com/blog/react-native-bridge/
       \endverb
     \endentry
   \endsortlist

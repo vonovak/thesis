@@ -154,6 +154,27 @@
       \verb http://stateofjs.com/2016/statemanagement/
       \endverb
     \endentry
+    \entry{cordova:intro}{online}{}
+      \name{author}{1}{}{%
+        {{hash=d2dff3f05ff8c469cbde9a642ce9631a}{%
+           family={Cordova},
+           family_i={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{d2dff3f05ff8c469cbde9a642ce9631a}
+      \strng{fullhash}{d2dff3f05ff8c469cbde9a642ce9631a}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Overview}
+      \field{urlday}{08}
+      \field{urlmonth}{01}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \verb{url}
+      \verb https://cordova.apache.org/docs/en/latest/guide/overview/
+      \endverb
+    \endentry
     \entry{googleAdwords}{online}{}
       \name{author}{1}{}{%
         {{hash=cfd6da2f2cd6de39aa15395cc1126664}{%
@@ -173,6 +194,31 @@
       \verb{url}
       \verb http://adwords.blogspot.com/2015/05/building-for-next-moment.html
       \endverb
+    \endentry
+    \entry{learningRN}{book}{}
+      \name{author}{1}{}{%
+        {{hash=0bb47315c14766cde43c758d8a7dedf1}{%
+           family={Eisenman},
+           family_i={E\bibinitperiod},
+           given={Bonnie},
+           given_i={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {O'Reilly}%
+      }
+      \strng{namehash}{0bb47315c14766cde43c758d8a7dedf1}
+      \strng{fullhash}{0bb47315c14766cde43c758d8a7dedf1}
+      \field{sortinit}{E}
+      \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{Edition 1}
+      \field{isbn}{978-1-491-92900-1}
+      \field{month}{12}
+      \field{title}{Learning React Native}
+      \field{year}{2015}
+      \field{pages}{254}
+      \range{pages}{1}
     \endentry
     \entry{exnav}{online}{}
       \name{author}{1}{}{%
@@ -360,6 +406,27 @@
       \field{year}{2016}
       \verb{url}
       \verb https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html
+      \endverb
+    \endentry
+    \entry{ionic:cordova}{online}{}
+      \name{author}{1}{}{%
+        {{hash=70d481439f9146177564bff364eab487}{%
+           family={Ionic},
+           family_i={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{70d481439f9146177564bff364eab487}
+      \strng{fullhash}{70d481439f9146177564bff364eab487}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Installing Ionic and its Dependencies}
+      \field{urlday}{08}
+      \field{urlmonth}{01}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \verb{url}
+      \verb http://ionicframework.com/docs/guide/installation.html
       \endverb
     \endentry
     \entry{rn:jsenviroment}{online}{}

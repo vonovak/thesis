@@ -29,13 +29,13 @@ In the end, the prototype largely follows the structure of Memsource cloud, but 
 	\label{mock2}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[]
 	\includegraphics[width=0.7\textwidth]{pics/jobs1}
 	\caption{Job list (left) and a screen where ``Job 1'' is selected and different actions are available for it (right).}
 	\label{mock3}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[]
 	\includegraphics[width=0.7\textwidth]{pics/addJobs}
 	\caption{Adding a new job to a project.}
 	\label{mock4}
@@ -53,7 +53,7 @@ Figure \ref{mock4} contains the screens for adding a new job to a project from w
 For iOS, which has different interaction patters compared to Android, I created separate mockups of what the UI could look like. The figure (\ref{mock5}) shows the mockup of job listing and handling.
 
 \begin{figure}[]
-	\includegraphics[width=0.8\textwidth]{pics/iOSProjs2}
+	\includegraphics[width=0.8\textwidth]{pics/iosProjs2}
 	\caption{Different way of listing jobs within a project on iOS. The second screen displays the state of the first after clicking on the 'edit' button.}
 	\label{mock5}
 \end{figure}
@@ -132,9 +132,9 @@ The next part is observing the changes in observable data. This is done through 
 One of the most important tracked function is \texttt{autorun}. If an observable data used during its execution changes, the \texttt{autorun} is re-run. This is the function that is responsible for keeping the React views in sync with the observable state. MobX provides the mobx-react package which includes the \texttt{@observer} decorator which can be used for React component to make them react to changes in observable data, and the decorator makes use of \texttt{autorun} internally \cite{mobx:autorun}.
 MobX also provides many other reactive utility functions for more fine-grained reactions. An example of how MobX can be used with React is shown in figure \ref{code:mobx} where a simple React component shows the number of seconds since the code was executed.
 
-
+\begin{minipage}{\linewidth}
 \lstinputlisting[label=code:mobx,caption=Using MobX with React]{./code/mobx.js}
-
+\end{minipage}
 
 After developing a small part of the application with Redux and also MobX, I chose to use MobX for storing the app state. The reasons for choosing MobX were its simplicity and proximity to object-oriented software design which I'm more experienced with. 
 Using Redux requires writing boilerplate code to describe the actions and writing the reducers. Also, it is not always possible to dispatch actions that are plain objects - communication with Memsource API, for example, would require dispatching functions that would change the state after receiving data from the API. Working with hierarchies of objects also requires normalizing the application state \cite{redux:normalize}, similar to how it is done in databases, with ids used as keys for retrieving a referenced object from other parts of the state tree. Apart from Redux itself, this then involves understanding several other libraries such as normalizr, redux-thunk (or similar), reselect (optional) and Immutable.js (optional but much recommended).
